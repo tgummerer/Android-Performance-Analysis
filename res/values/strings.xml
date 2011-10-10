@@ -4,4 +4,5 @@
     <string name="app_name">PerformanceAnalysis</string>
     <string name="main_startTests">Start tests</string>
     <string name="main_showDiagram">Show Diagram</string>
+    <string name="main_monitor">Monitor apps</string>
 </resources>
