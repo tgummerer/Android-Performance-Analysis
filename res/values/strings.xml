@@ -2,4 +2,6 @@
 <resources>
     <string name="hello">Hello World, PerformanceAnalysisActivity!</string>
     <string name="app_name">PerformanceAnalysis</string>
+    <string name="main_startTests">Start tests</string>
+    <string name="main_showDiagram">Show Diagram</string>
 </resources>
