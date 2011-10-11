@@ -4,8 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center">
-    <TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center" android:text="@string/app_name" android:layout_marginBottom="50dp"></TextView>
+    android:gravity="center" android:weightSum="1">
+    <TextView android:layout_marginBottom="50dp" android:gravity="center" android:id="@+id/textView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:text="@string/app_name" android:layout_weight="0.31"></TextView>
     <TableRow android:gravity="center" android:id="@+id/tableRow1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginBottom="20dp">
         <Button android:id="@+id/home_btn_start_tests" android:layout_width="150dp" android:text="@string/home_start_tests" android:drawableTop="@drawable/starttests" style="@style/DashboardButton"></Button>
  		<Button android:id="@+id/home_btn_show_diagram" android:layout_width="150dp" android:text="@string/home_show_diagram" android:drawableTop="@drawable/diagram" style="@style/DashboardButton"></Button>   
@@ -14,4 +14,5 @@
     	<Button android:id="@+id/home_btn_monitor_applications" android:layout_width="150dp" android:text="@string/home_monitor_applications" android:drawableTop="@drawable/monitor" style="@style/DashboardButton"></Button>
     	<Button android:id="@+id/home_btn_show_monitor_app_diagram" android:layout_width="150dp" android:text="@string/home_show_monitor_diagram" android:drawableTop="@drawable/diagram" style="@style/DashboardButton"></Button>
     </TableRow>
+    <TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceSmall" android:gravity="center_horizontal|bottom" android:text="@string/home_credit" android:textSize="4pt" android:layout_height="185dp"></TextView>
 </TableLayout>
