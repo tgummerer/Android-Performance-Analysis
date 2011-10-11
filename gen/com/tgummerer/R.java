@@ -11,20 +11,36 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int icon=0x7f020000;
+        public static final int creep002=0x7f020000;
+        public static final int creep003=0x7f020001;
+        public static final int creep006=0x7f020002;
+        public static final int creep007=0x7f020003;
+        public static final int creep008=0x7f020004;
+        public static final int diagram=0x7f020005;
+        public static final int icon=0x7f020006;
+        public static final int monitor=0x7f020007;
+        public static final int starttests=0x7f020008;
     }
     public static final class id {
-        public static final int button1=0x7f050000;
-        public static final int button2=0x7f050001;
+        public static final int home_btn_monitor_applications=0x7f060005;
+        public static final int home_btn_show_diagram=0x7f060003;
+        public static final int home_btn_show_monitor_app_diagram=0x7f060006;
+        public static final int home_btn_start_tests=0x7f060002;
+        public static final int tableRow1=0x7f060001;
+        public static final int tableRow2=0x7f060004;
+        public static final int textView1=0x7f060000;
     }
     public static final class layout {
         public static final int main=0x7f030000;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int hello=0x7f040000;
-        public static final int main_monitor=0x7f040004;
-        public static final int main_showDiagram=0x7f040003;
-        public static final int main_startTests=0x7f040002;
+        public static final int app_name=0x7f040000;
+        public static final int home_monitor_applications=0x7f040003;
+        public static final int home_show_diagram=0x7f040002;
+        public static final int home_show_monitor_diagram=0x7f040004;
+        public static final int home_start_tests=0x7f040001;
+    }
+    public static final class style {
+        public static final int DashboardButton=0x7f050000;
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, PerformanceAnalysisActivity!</string>
-    <string name="app_name">PerformanceAnalysis</string>
-    <string name="main_startTests">Start tests</string>
-    <string name="main_showDiagram">Show Diagram</string>
-    <string name="main_monitor">Monitor apps</string>
+    <string name="app_name">Performance Analysis</string>
+    <string name="home_start_tests">Start tests</string>
+    <string name="home_show_diagram">Show Diagram</string>
+    <string name="home_monitor_applications">Monitor apps</string>
+    <string name="home_show_monitor_diagram">Show monitor diagram</string>
 </resources>

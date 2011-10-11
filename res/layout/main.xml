@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<!-- Icons by www.androidicons.com -->
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/main_startTests" android:id="@+id/button1"></Button>
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/main_showDiagram" android:id="@+id/button2"></Button>
-</LinearLayout>
+    android:gravity="center">
+    <TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center" android:text="@string/app_name" android:layout_marginBottom="50dp"></TextView>
+    <TableRow android:gravity="center" android:id="@+id/tableRow1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginBottom="20dp">
+        <Button android:id="@+id/home_btn_start_tests" android:layout_width="150dp" android:text="@string/home_start_tests" android:drawableTop="@drawable/starttests" style="@style/DashboardButton"></Button>
+ 		<Button android:id="@+id/home_btn_show_diagram" android:layout_width="150dp" android:text="@string/home_show_diagram" android:drawableTop="@drawable/diagram" style="@style/DashboardButton"></Button>   
+    </TableRow>
+    <TableRow android:gravity="center" android:id="@+id/tableRow2" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginTop="20dp">
+    	<Button android:id="@+id/home_btn_monitor_applications" android:layout_width="150dp" android:text="@string/home_monitor_applications" android:drawableTop="@drawable/monitor" style="@style/DashboardButton"></Button>
+    	<Button android:id="@+id/home_btn_show_monitor_app_diagram" android:layout_width="150dp" android:text="@string/home_show_monitor_diagram" android:drawableTop="@drawable/diagram" style="@style/DashboardButton"></Button>
+    </TableRow>
+</TableLayout>
