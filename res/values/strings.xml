@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--  
+ - Performance analysis
+ - 
+ - Strings (English)
+ - 
+ - Copyright (c) Thomas Gummerer 2011 | All rights reserved
+ -->
 <resources>
     <string name="app_name">Performance Analysis</string>
     <string name="home_start_tests">Start tests</string>
