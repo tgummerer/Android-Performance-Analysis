@@ -4,7 +4,7 @@ import java.util.Random;
 
 import android.os.AsyncTask;
 
-public class Algorithms extends AsyncTask<Void, Integer, Void> {
+public class Algorithms extends AsyncTask<Void, Long, Void> {
 	private Progress progress = null;
 	
 	public Algorithms(Progress progress) {
@@ -18,29 +18,47 @@ public class Algorithms extends AsyncTask<Void, Integer, Void> {
 		return null;
 	}
 	
-	protected void onProgressUpdate(Integer... progress) {
+	protected void onProgressUpdate(Long... progress) {
 		System.out.println(progress[0] + " " + progress[1]);
+	}
+	
+	private void showProgress(long algorithmID, long time) {
+		Long[] array = new Long[2];
+		array[0] = algorithmID;
+		array[1] = time;
+		publishProgress(array);
 	}
 	
 	// Algorithm 1, for loop doing nothing 
 	private void forloop () {
-		Integer[] array = new Integer[2];
-		Integer a = new Integer(1);
-		array[0] = a;
-		a = 2;
-		array[1] = a;
-		publishProgress(array);
+		showProgress(1, 0);
+		// Using System.nanoTime instead of System.getTimeInMillis is more accurate
+		// according to http://stackoverflow.com/questions/1770010/how-do-i-measure-time-elapsed-in-java
+		long startTime = System.nanoTime();
+		
+		// ALGORITHM
 		for (int i = 0; i < 10000; i++);
+		// END ALGORITHM
+		
+		long endTime = System.nanoTime();
+		showProgress(1, endTime - startTime);
 	}
 
     // Algorithm 2, Random quicksort of a backwards sorted array of size 10000
 	// If it wouldn't be random there is a high possibility of a stackoverflow
     private void sort() {
-        int [] arr = new int[100000];
+    	showProgress(1, 0);
+		long startTime = System.nanoTime();
+		// ALGORITHM
+		int[] arr = new int[10000];
         for (int i = 0; i < arr.length; i++)
             arr[i] = arr.length - i;
-
+        
         quicksort(arr, 0, arr.length - 1);
+        // END ALGORITHM
+        
+        long endTime = System.nanoTime();
+		showProgress(1, endTime - startTime);
     }
 
     private void quicksort(int arr[], int start, int end) {
