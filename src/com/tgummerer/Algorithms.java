@@ -4,7 +4,7 @@ import java.util.Random;
 
 import android.os.AsyncTask;
 
-public class Algorithms extends AsyncTask<Void, Void, Void> {
+public class Algorithms extends AsyncTask<Void, Integer, Void> {
 	private Progress progress = null;
 	
 	public Algorithms(Progress progress) {
@@ -18,8 +18,18 @@ public class Algorithms extends AsyncTask<Void, Void, Void> {
 		return null;
 	}
 	
+	protected void onProgressUpdate(Integer... progress) {
+		System.out.println(progress[0] + " " + progress[1]);
+	}
+	
 	// Algorithm 1, for loop doing nothing 
 	private void forloop () {
+		Integer[] array = new Integer[2];
+		Integer a = new Integer(1);
+		array[0] = a;
+		a = 2;
+		array[1] = a;
+		publishProgress(array);
 		for (int i = 0; i < 10000; i++);
 	}
 
