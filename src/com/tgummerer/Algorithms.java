@@ -2,16 +2,20 @@ package com.tgummerer;
 
 import java.util.Random;
 
-public class Algorithms {
+import android.os.AsyncTask;
+
+public class Algorithms extends AsyncTask<Void, Void, Void> {
 	private Progress progress = null;
 	
 	public Algorithms(Progress progress) {
 		this.progress = progress;
 	}
 	
-	public void startAlgorithms () {
+	@Override
+	protected Void doInBackground(Void... params) {
 		forloop();
-        sort();
+		sort();
+		return null;
 	}
 	
 	// Algorithm 1, for loop doing nothing 
@@ -58,5 +62,5 @@ public class Algorithms {
         int t = arr[i];
         arr[i] = arr[k];
         arr[k] = t;
-    }
+    }	
 }

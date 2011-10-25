@@ -19,6 +19,6 @@ public class Progress extends Activity {
         setContentView(R.layout.progress);
         
         Algorithms alg = new Algorithms(this);
-        alg.startAlgorithms();
+        alg.execute((Void[])null);
     }
 }
