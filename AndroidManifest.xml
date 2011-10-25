@@ -13,7 +13,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="TestActivity"></activity>
+        <activity android:name=".Progress"></activity>
 
+        <provider android:name="com.tgummerer.DataProvider" android:authorities="com.tgummerer.dataprovider"></provider>
     </application>
 </manifest>

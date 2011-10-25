@@ -11,12 +11,14 @@ package com.tgummerer;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class TestActivity extends Activity {
+public class Progress extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tests);
+        setContentView(R.layout.progress);
+        
+        Algorithms alg = new Algorithms(this);
+        alg.startAlgorithms();
     }
-    
 }

@@ -22,7 +22,7 @@ public class PerformanceAnalysisActivity extends Activity {
     }
     
     public void startTests(View v) {
-    	Intent tests = new Intent(PerformanceAnalysisActivity.this, TestActivity.class);
+    	Intent tests = new Intent(PerformanceAnalysisActivity.this, Progress.class);
     	startActivity(tests);
     }
 }
