@@ -21,7 +21,8 @@ public class Progress extends Activity {
         Algorithms alg = new Algorithms(this);
         alg.startAlgorithms();
         
-        AlgorithmsWrapper calg = new AlgorithmsWrapper();
-        calg.startCAlgorithms();
+        CAlgorithms calg = new CAlgorithms();
+        calg.cforloop();
+        calg.csort();
     }
 }	

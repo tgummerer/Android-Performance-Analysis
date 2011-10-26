@@ -16,7 +16,7 @@ public class Algorithms {
 	
 	// Algorithm 1, for loop doing nothing 
 	private void forloop () {
-		for (int i = 0; i < 10000; i++);
+		for (int i = 0; i < 100000; i++);
 	}
 
     // Algorithm 2, Random quicksort of a backwards sorted array of size 10000

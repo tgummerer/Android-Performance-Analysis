@@ -1,8 +1,8 @@
 package com.tgummerer;
 
-public class AlgorithmsWrapper {
-	public native void startCAlgorithms();
-	
+public class CAlgorithms{
+	public native void cforloop();
+	public native void csort();
     static {
         System.loadLibrary("algorithms");
     }
