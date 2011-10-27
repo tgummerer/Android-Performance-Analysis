@@ -1,6 +1,6 @@
 #include <jni.h>
-#include <stdio.h>
 #include <stdlib.h> // For Random
+#include <sys/time.h> // For exact time measurements (Source: http://stackoverflow.com/questions/1861294/how-to-calculate-execution-time-of-a-code-snippet-in-c)
 
 #define ARRAY_LENGTH 100000
 
@@ -9,11 +9,18 @@ void swap( int[], int, int );
 
 /* The functions return the time the algorithm took to run */
 
-int Java_com_tgummerer_CAlgorithms_cforloop( JNIEnv * env ) 
+long Java_com_tgummerer_CAlgorithms_cforloop( JNIEnv * env ) 
 {
+
+    clock_t start, finish;
+    start = clock();
+
     int i;
     for(i = 0; i < 100000; i++);
-    return 0;
+
+    finish = clock();
+
+    return finish - start;
 }
 
 int Java_com_tgummerer_CAlgorithms_csort( JNIEnv * env ) 

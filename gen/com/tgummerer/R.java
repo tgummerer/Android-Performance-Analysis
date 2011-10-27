@@ -26,6 +26,7 @@ public final class R {
         public static final int home_btn_show_diagram=0x7f060003;
         public static final int home_btn_show_monitor_app_diagram=0x7f060006;
         public static final int home_btn_start_tests=0x7f060002;
+        public static final int progress_textview=0x7f060008;
         public static final int tableRow1=0x7f060001;
         public static final int tableRow2=0x7f060004;
         public static final int textView1=0x7f060000;

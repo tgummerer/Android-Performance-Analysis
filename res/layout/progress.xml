@@ -6,11 +6,16 @@
  - 
  - Copyright (c) Thomas Gummerer 2011 | All rights reserved
  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-    
+    <TextView
+        android:id="@+id/progress_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.82"
+        android:text="" />
+
 </LinearLayout>
