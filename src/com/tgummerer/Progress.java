@@ -29,14 +29,22 @@ public class Progress extends Activity {
         calg.execute((Void[])null);
     }
     
-    public void algorithmStarted(long algorithmID) {
+    public void algorithmStarted(long langID, long algorithmID) {
     	TextView tv = (TextView)findViewById(R.id.progress_textview);
-    	tv.append("Algorithm " + algorithmID + " started...\n");
+    	if (langID == 0)
+    		tv.append("[Java] Algorithm " + algorithmID + " started...\n");
+    	else
+    		tv.append("[C] Algorithm " + algorithmID + " started...\n");
+    		
     }
     
-    public void algorithmEnded(long algorithmID, long time) {
+    public void algorithmEnded(long langID, long algorithmID, long time) {
     	TextView tv = (TextView)findViewById(R.id.progress_textview);
-    	tv.append("Algorithm " + algorithmID + " completed in " + time + "\n");
+    	if (langID == 0)
+    		tv.append("[Java] Algorithm " + algorithmID + " completed in " + time + "\n");
+    	else
+    		tv.append("[C] Algorithm " + algorithmID + " completed in " + time + "\n");
+
     }
     
     private class Algorithms extends AsyncTask<Void, Long, Void> {
@@ -53,23 +61,24 @@ public class Progress extends Activity {
     	}
     	
     	protected void onProgressUpdate(Long... progress) {
-    		if (progress[1] == 0) {
-    			algorithmStarted(progress[0]);
+    		if (progress[2] == 0) {
+    			algorithmStarted(progress[0], progress[1]);
     		} else {
-    			algorithmEnded(progress[0], progress[1]);
+    			algorithmEnded(progress[0], progress[1], progress[2]);
     		}
     	}
     	
-    	private void showProgress(long algorithmID, long time) {
-    		Long[] array = new Long[2];
-    		array[0] = algorithmID;
-    		array[1] = time;
+    	private void showProgress(long langID, long algorithmID, long time) {
+    		Long[] array = new Long[3];
+    		array[0] = langID;
+    		array[1] = algorithmID;
+    		array[2] = time;
     		publishProgress(array);
     	}
     	
     	// Algorithm 1, for loop doing nothing 
     	private void forloop () {
-    		showProgress(1, 0);
+    		showProgress(0, 1, 0);
     		// Using System.nanoTime instead of System.getTimeInMillis is more accurate
     		// according to http://stackoverflow.com/questions/1770010/how-do-i-measure-time-elapsed-in-java
     		long startTime = System.nanoTime();
@@ -79,13 +88,13 @@ public class Progress extends Activity {
     		// END ALGORITHM
     		
     		long endTime = System.nanoTime();
-    		showProgress(1, endTime - startTime);
+    		showProgress(0, 1, endTime - startTime);
     	}
 
         // Algorithm 2, Random quicksort of a backwards sorted array of size 10000
     	// If it wouldn't be random there is a high possibility of a stackoverflow
         private void sort() {
-        	showProgress(2, 0);
+        	showProgress(0, 2, 0);
     		long startTime = System.nanoTime();
     		// ALGORITHM
     		int[] arr = new int[100000];
@@ -96,7 +105,7 @@ public class Progress extends Activity {
             // END ALGORITHM
             
             long endTime = System.nanoTime();
-    		showProgress(2, endTime - startTime);
+    		showProgress(0, 2, endTime - startTime);
         }
 
         private void quicksort(int arr[], int start, int end) {
