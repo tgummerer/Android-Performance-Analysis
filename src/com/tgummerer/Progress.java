@@ -139,4 +139,61 @@ public class Progress extends Activity {
             arr[k] = t;
         }	
     }
+
+    private class CAlgorithms extends AsyncTask<Void, Long, Void> {
+    	
+    	@Override
+    	protected Void doInBackground(Void... params) {
+    		forloop();
+    		sort();
+    		return null;
+    	}
+    	
+    	protected void onProgressUpdate(Long... progress) {
+    		if (progress[2] == 0) {
+    			algorithmStarted(progress[0], progress[1]);
+    		} else {
+    			algorithmEnded(progress[0], progress[1], progress[2]);
+    		}
+    	}
+    	
+    	private void showProgress(long langID, long algorithmID, long time) {
+    		Long[] array = new Long[3];
+    		array[0] = langID;
+    		array[1] = algorithmID;
+    		array[2] = time;
+    		publishProgress(array);
+    	}
+    	
+    	// Algorithm 1, for loop doing nothing 
+    	private void forloop () {
+    		showProgress(1, 1, 0);
+    		// Using System.nanoTime instead of System.getTimeInMillis is more accurate
+    		// according to http://stackoverflow.com/questions/1770010/how-do-i-measure-time-elapsed-in-java
+    		long startTime = System.nanoTime();
+    		
+    		long time = cforloop();
+    		
+    		long endTime = System.nanoTime();
+    		showProgress(1, 1, endTime - startTime);
+    	}
+
+        // Algorithm 2, Random quicksort of a backwards sorted array of size 10000
+    	// If it wouldn't be random there is a high possibility of a stackoverflow
+        private void sort() {
+        	showProgress(1, 2, 0);
+    		long startTime = System.nanoTime();
+    		csort();
+            
+            long endTime = System.nanoTime();
+    		showProgress(1, 2, endTime - startTime);
+        }  
+    }
+    
+    public native long cforloop();
+	public native void csort();
+    
+    static {
+        System.loadLibrary("algorithms");
+    }
 }	

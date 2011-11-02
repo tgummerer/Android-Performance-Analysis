@@ -9,7 +9,7 @@ void swap( int[], int, int );
 
 /* The functions return the time the algorithm took to run */
 
-long Java_com_tgummerer_CAlgorithms_cforloop( JNIEnv * env ) 
+long Java_com_tgummerer_Progress_cforloop( JNIEnv * env ) 
 {
 
     clock_t start, finish;
@@ -23,7 +23,7 @@ long Java_com_tgummerer_CAlgorithms_cforloop( JNIEnv * env )
     return finish - start;
 }
 
-int Java_com_tgummerer_CAlgorithms_csort( JNIEnv * env ) 
+int Java_com_tgummerer_Progress_csort( JNIEnv * env ) 
 {
     int arr[ARRAY_LENGTH];
     int i = 0;
