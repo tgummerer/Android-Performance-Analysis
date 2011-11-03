@@ -2,7 +2,7 @@
 #include <stdlib.h> // For Random
 #include <sys/time.h> // For exact time measurements (Source: http://stackoverflow.com/questions/1861294/how-to-calculate-execution-time-of-a-code-snippet-in-c)
 
-#define ARRAY_LENGTH 100000
+#define ARRAY_LENGTH 10000
 
 void quicksort( int[], int, int );
 void swap( int[], int, int );
@@ -30,6 +30,9 @@ int Java_com_tgummerer_Progress_csort( JNIEnv * env )
     for (; i < ARRAY_LENGTH; i++) {
         arr[i] = ARRAY_LENGTH - 1;
     }
+
+    // Initialize random values for random quicksort
+    srand(time(NULL));
 
     quicksort(arr, 0, ARRAY_LENGTH - 1);
     return 0;

@@ -11,6 +11,8 @@ package com.tgummerer;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -22,11 +24,18 @@ public class Progress extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.progress);
         
+        // Empty database before adding new records
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL("delete from measurements");
+        
         Algorithms alg = new Algorithms();
         alg.execute((Void[])null);
-        
-        CAlgorithms calg = new CAlgorithms();
-        calg.execute((Void[])null);
+	}
+    
+    public void executeCAlgorithms() {
+    	CAlgorithms calg = new CAlgorithms();
+    	calg.execute((Void[])null);
     }
     
     public void algorithmStarted(long langID, long algorithmID) {
@@ -40,24 +49,34 @@ public class Progress extends Activity {
     
     public void algorithmEnded(long langID, long algorithmID, long time) {
     	TextView tv = (TextView)findViewById(R.id.progress_textview);
+    	DatabaseHelper dbhelper = new DatabaseHelper(this);
+    	SQLiteDatabase db = dbhelper.getWritableDatabase();
+    	
     	if (langID == 0)
     		tv.append("[Java] Algorithm " + algorithmID + " completed in " + time + "\n");
     	else
     		tv.append("[C] Algorithm " + algorithmID + " completed in " + time + "\n");
+    	
+    	ContentValues values = new ContentValues(3);
+    	values.put("langid", langID);
+    	values.put("algorithmid", algorithmID);
+    	values.put("time", time);
+    	db.insert("measurements", null, values);
+    	db.close();
 
     }
     
-    private class Algorithms extends AsyncTask<Void, Long, Void> {
+    private class Algorithms extends AsyncTask<Void, Long, Integer> {
     	
     	public Algorithms() {
 
     	}
     	
     	@Override
-    	protected Void doInBackground(Void... params) {
+    	protected Integer doInBackground(Void... params) {
     		forloop();
     		sort();
-    		return null;
+    		return 1;
     	}
     	
     	protected void onProgressUpdate(Long... progress) {
@@ -76,6 +95,11 @@ public class Progress extends Activity {
     		publishProgress(array);
     	}
     	
+    	
+		protected void onPostExecute(Integer result) {
+			executeCAlgorithms();
+		}
+    	 
     	// Algorithm 1, for loop doing nothing 
     	private void forloop () {
     		showProgress(0, 1, 0);
@@ -97,7 +121,7 @@ public class Progress extends Activity {
         	showProgress(0, 2, 0);
     		long startTime = System.nanoTime();
     		// ALGORITHM
-    		int[] arr = new int[100000];
+    		int[] arr = new int[10000];
             for (int i = 0; i < arr.length; i++)
                 arr[i] = arr.length - i;
             
@@ -172,7 +196,7 @@ public class Progress extends Activity {
     		// according to http://stackoverflow.com/questions/1770010/how-do-i-measure-time-elapsed-in-java
     		long startTime = System.nanoTime();
     		
-    		long time = cforloop();
+    		cforloop();
     		
     		long endTime = System.nanoTime();
     		showProgress(1, 1, endTime - startTime);
