@@ -14,5 +14,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Progress"></activity>
+        <activity android:name=".DiagramActivity"></activity>
     </application>
 </manifest>

@@ -25,4 +25,9 @@ public class PerformanceAnalysisActivity extends Activity {
     	Intent tests = new Intent(PerformanceAnalysisActivity.this, Progress.class);
     	startActivity(tests);
     }
+
+    public void showDiagram(View v) {
+        Intent diagram = new Intent(PerformanceAnalysisActivity.this, DiagramActivity.class);
+        startActivity(diagram);
+    }
 }
