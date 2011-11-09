@@ -36,6 +36,7 @@ public class Progress extends Activity {
     public void executeCAlgorithms() {
     	CAlgorithms calg = new CAlgorithms();
     	calg.execute((Void[])null);
+    	
     }
     
     public void algorithmStarted(long langID, long algorithmID) {
@@ -76,6 +77,7 @@ public class Progress extends Activity {
     	protected Integer doInBackground(Void... params) {
     		forloop();
     		sort();
+            recursive();
     		return 1;
     	}
     	
@@ -97,6 +99,7 @@ public class Progress extends Activity {
     	
     	
 		protected void onPostExecute(Integer result) {
+            // Execute the C algorithms after the Java algorithms
 			executeCAlgorithms();
 		}
     	 
@@ -121,7 +124,7 @@ public class Progress extends Activity {
         	showProgress(0, 2, 0);
     		long startTime = System.nanoTime();
     		// ALGORITHM
-    		int[] arr = new int[10000];
+    		int[] arr = new int[1000];
             for (int i = 0; i < arr.length; i++)
                 arr[i] = arr.length - i;
             
@@ -162,6 +165,24 @@ public class Progress extends Activity {
             arr[i] = arr[k];
             arr[k] = t;
         }	
+
+        // Algorithm 3, stupid recursive function
+        private void recursive() {
+            showProgress(0, 3, 0);
+            long startTime = System.nanoTime();
+
+            recursive(325);
+
+            long endTime = System.nanoTime();
+            showProgress(0, 3, endTime - startTime);
+        }
+
+        private int recursive(int n) {
+            if (n == 1)
+                return 1;
+            return recursive(n - 1);
+        }
+
     }
 
     private class CAlgorithms extends AsyncTask<Void, Long, Void> {
@@ -170,6 +191,7 @@ public class Progress extends Activity {
     	protected Void doInBackground(Void... params) {
     		forloop();
     		sort();
+            recursive();
     		return null;
     	}
     	
@@ -212,10 +234,23 @@ public class Progress extends Activity {
             long endTime = System.nanoTime();
     		showProgress(1, 2, endTime - startTime);
         }  
+
+        // Algorithm 3
+        private void recursive() {
+            showProgress(1, 3, 0);
+            long startTime = System.nanoTime();
+
+            crecursive(325);
+
+            long endTime = System.nanoTime();
+            showProgress(1, 3, endTime - startTime);
+        }
+            
     }
     
     public native long cforloop();
 	public native void csort();
+    public native void crecursive(int n);
     
     static {
         System.loadLibrary("algorithms");

@@ -2,7 +2,7 @@
 #include <stdlib.h> // For Random
 #include <sys/time.h> // For exact time measurements (Source: http://stackoverflow.com/questions/1861294/how-to-calculate-execution-time-of-a-code-snippet-in-c)
 
-#define ARRAY_LENGTH 10000
+#define ARRAY_LENGTH 1000
 
 void quicksort( int[], int, int );
 void swap( int[], int, int );
@@ -66,4 +66,18 @@ void swap( int arr[], int i, int k ) {
     int t = arr[i];
     arr[i] = arr[k];
     arr[k] = t;
+}
+
+// Extra method call, to avoid passing the pointer to the JNIEnv each time.
+// May be only a small overhead, but may be quite significant
+long recursive( long n ) {
+    if (n == 1)
+        return 1;
+    return recursive(n - 1);
+}
+
+void Java_com_tgummerer_Progress_crecursive( JNIEnv * env, int n )
+{
+    recursive(n);
+    return;
 }
