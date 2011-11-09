@@ -167,6 +167,8 @@ public class Progress extends Activity {
         }	
 
         // Algorithm 3, stupid recursive function
+        // Android chokes on recursions deeper then 325 (or slightly deeper
+        // but 350 didn't work), hence the small number.
         private void recursive() {
             showProgress(0, 3, 0);
             long startTime = System.nanoTime();
