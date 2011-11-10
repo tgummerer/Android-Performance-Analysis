@@ -10,17 +10,17 @@ void prepareFrame(int w, int h)
 {
     glViewport(0, 0, w, h);
 
-    //glClearColorx((GLfixed)(0.1f * 65536),
-//                  (GLfixed)(0.2f * 65536),
- //                 (GLfixed)(0.3f * 65536), 0x10000);
-    //glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    glClearColorx((GLfixed)(0.1f * 65536),
+                  (GLfixed)(0.2f * 65536),
+                  (GLfixed)(0.3f * 65536), 0x10000);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 }
 
 
 void appInit()
 {
-    //glEnable(GL_NORMALIZE);
-    //glEnable(GL_DEPTH_TEST);
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_DEPTH_TEST);
 }
 
 void appRender(int w, int h)
