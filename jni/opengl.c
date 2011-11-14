@@ -17,6 +17,7 @@ static int  demoStopped  = 0;
 
 void Java_com_tgummerer_DiagramView_nativeInit( JNIEnv * env ) 
 {
+    importGLInit();
     appInit();
     appAlive = 1;
 }
@@ -30,4 +31,9 @@ void Java_com_tgummerer_DiagramView_nativeResize( JNIEnv * env, jobject thiz, ji
 void Java_com_tgummerer_DiagramView_nativeRender( JNIEnv * env )
 {
     appRender(windowWidth, windowHeight);
+}
+
+void Java_com_tgummerer_DiagramView_nativeDone( JNIEnv * env )
+{
+    importGLDeinit();
 }

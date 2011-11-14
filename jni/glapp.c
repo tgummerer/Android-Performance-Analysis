@@ -10,28 +10,24 @@
 void prepareFrame(int w, int h)
 {
     glViewport(0, 0, w, h);
-
-    glClearColorx((GLfixed)(0.1f * 65536),
-                  (GLfixed)(0.1f * 65536),
-                  (GLfixed)(0.1f * 65536), 0x10000);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 }
 
 void appInit()
 {
     glEnable(GL_NORMALIZE);
-    glEnable(GL_DEPTH_TEST);
+    // The diagram will be in 2D, thus no depth test needed
+    glDisable(GL_DEPTH_TEST);
     glEnableClientState(GL_VERTEX_ARRAY);
-
 }
 
 void appRender(int w, int h)
 {
     // Prepare OpenGL ES for rendering of the frame.
     prepareFrame(w, h);
-    GLfloat vertices[] = {1,0,0, 0,1,0, -1,0,0};
+    GLfloat vertices[] = {0.5,0, -0.5,1, 0.5,1, -0.5,0};
     glColor4f(0.63671875f, 0.76953125f, 0.22265625f, 0.0f);
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glVertexPointer(2, GL_FLOAT, 0, vertices);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
