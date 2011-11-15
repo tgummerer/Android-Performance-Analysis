@@ -15,5 +15,6 @@ extern int importGLInit();
 
 void appInit();
 void appRender(int, int);
+void drawRectangle(float, float, float, float);
 
 #endif

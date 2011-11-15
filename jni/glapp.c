@@ -25,9 +25,15 @@ void appRender(int w, int h)
 {
     // Prepare OpenGL ES for rendering of the frame.
     prepareFrame(w, h);
-    GLfloat vertices[] = {0.5,0, -0.5,1, 0.5,1, -0.5,0};
     glColor4f(0.63671875f, 0.76953125f, 0.22265625f, 0.0f);
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    drawRectangle(-0.5, 0, 1, 1);
 }
 
+// Attention, x, height go from left to right, and y from top to bottom, since diagram
+// will be displayed for a rotated phon
+void drawRectangle(float x, float y, float height, float width)
+{
+    GLfloat vertices[] = {x+height,y, x,y+width, x+height,y+width, x+height,y, x,y, x,y+width };
+    glVertexPointer(2, GL_FLOAT, 0, vertices);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+}
