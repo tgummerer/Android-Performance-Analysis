@@ -107,7 +107,7 @@ public class Progress extends Activity {
     		long startTime = System.nanoTime();
     		
     		// ALGORITHM
-    		for (int i = 0; i < 100000; i++);
+    		for (int i = 0; i < 1000000; i++);
     		// END ALGORITHM
     		
     		long endTime = System.nanoTime();

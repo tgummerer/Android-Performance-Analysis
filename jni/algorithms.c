@@ -16,7 +16,7 @@ long Java_com_tgummerer_Progress_cforloop( JNIEnv * env )
     start = clock();
 
     int i;
-    for(i = 0; i < 100000; i++);
+    for(i = 0; i < 1000000; i++);
 
     finish = clock();
 
