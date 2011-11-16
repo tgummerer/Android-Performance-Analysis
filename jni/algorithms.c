@@ -1,6 +1,6 @@
 #include <jni.h>
 #include <stdlib.h> // For Random
-#include <sys/time.h> // For exact time measurements (Source: http://stackoverflow.com/questions/1861294/how-to-calculate-execution-time-of-a-code-snippet-in-c)
+#include <sys/time.h> // For exact time measurements (Source: http://stackoverflow.com/questions/1861294/how-to-calculate-execution-time-of-a-code-snippet-in-c) Doesn't currently work correctly
 
 #define ARRAY_LENGTH 1000
 
@@ -16,7 +16,7 @@ long Java_com_tgummerer_Progress_cforloop( JNIEnv * env )
     start = clock();
 
     int i;
-    for(i = 0; i < 100000; i++);
+    for(i = 0; i < 1000000; i++);
 
     finish = clock();
 

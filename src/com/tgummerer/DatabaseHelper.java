@@ -27,5 +27,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("drop table if exists measurements");
 		onCreate(db);
 	}
-
 }
