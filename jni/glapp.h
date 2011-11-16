@@ -12,9 +12,20 @@
 #include <GLES/gl.h>
 
 extern int importGLInit();
+extern int importGLDeinit();
 
-void appInit();
-void appRender(int, int);
-void drawRectangle(float, float, float, float);
+class OpenGL {
+    private:
+        int windowWidth;
+        int windowHeight;
+        void drawRectangle(float, float, float, float);
+    public:
+        OpenGL();
+        ~OpenGL();
+        void appInit();
+        void resize(int, int);
+        void prepareFrame();
+        void render();
+};
 
 #endif

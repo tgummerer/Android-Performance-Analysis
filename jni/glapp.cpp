@@ -1,19 +1,26 @@
 /*
  * Performance analysis
  * 
- * Native OpenGL, the corresponding c file should do most of the OpenGL work?? TODO
+ * Native OpenGL
  * 
  * Copyright (c) Thomas Gummerer 2011 | All rights reserved
  */
 #include "glapp.h"
 
-void prepareFrame(int w, int h)
+OpenGL::OpenGL()
 {
-    glViewport(0, 0, w, h);
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    importGLInit();
+    this->windowWidth = 320;
+    this->windowHeight = 480;
+    this->appInit();
 }
 
-void appInit()
+OpenGL::~OpenGL()
+{
+    importGLDeinit();
+}
+
+void OpenGL::appInit()
 {
     glEnable(GL_NORMALIZE);
     // The diagram will be in 2D, thus no depth test needed
@@ -21,17 +28,29 @@ void appInit()
     glEnableClientState(GL_VERTEX_ARRAY);
 }
 
-void appRender(int w, int h)
+void OpenGL::resize(int w, int h)
+{
+    windowWidth = w;
+    windowHeight = h;
+}
+
+void OpenGL::prepareFrame()
+{
+    glViewport(0, 0, windowWidth, windowHeight);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+}
+
+void OpenGL::render()
 {
     // Prepare OpenGL ES for rendering of the frame.
-    prepareFrame(w, h);
+    this->prepareFrame();
     glColor4f(0.63671875f, 0.76953125f, 0.22265625f, 0.0f);
-    drawRectangle(-0.5, 0, 1, 1);
+    this->drawRectangle(-0.5, 0, 1, 1);
 }
 
 // Attention, x, height go from left to right, and y from top to bottom, since diagram
 // will be displayed for a rotated phon
-void drawRectangle(float x, float y, float height, float width)
+void OpenGL::drawRectangle(float x, float y, float height, float width)
 {
     GLfloat vertices[] = {x+height,y, x,y+width, x+height,y+width, x+height,y, x,y, x,y+width };
     glVertexPointer(2, GL_FLOAT, 0, vertices);

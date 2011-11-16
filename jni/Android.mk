@@ -10,7 +10,7 @@ include $(BUILD_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := opengl
-LOCAL_SRC_FILES := opengl.c importgl.c glapp.c
+LOCAL_SRC_FILES := opengl.cpp importgl.cpp glapp.cpp
 
 LOCAL_LDLIBS := -lGLESv1_CM -ldl -llog
 
