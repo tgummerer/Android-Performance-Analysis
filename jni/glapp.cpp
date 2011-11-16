@@ -44,7 +44,7 @@ void OpenGL::render()
 {
     // Prepare OpenGL ES for rendering of the frame.
     this->prepareFrame();
-    glColor4f(0.63671875f, 0.76953125f, 0.22265625f, 0.0f);
+    this->setRGBColor(255, 120, 0, 0);
     this->drawRectangle(-0.5, 0, 1, 1);
 }
 
@@ -55,4 +55,10 @@ void OpenGL::drawRectangle(float x, float y, float height, float width)
     GLfloat vertices[] = {x+height,y, x,y+width, x+height,y+width, x+height,y, x,y, x,y+width };
     glVertexPointer(2, GL_FLOAT, 0, vertices);
     glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+// Set colors easier (0-255)
+void OpenGL::setRGBColor(int red, int green, int blue, float transparency)
+{
+    glColor4f((float)red/255, (float)green/255, (float)blue/255, transparency);
 }

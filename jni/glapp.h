@@ -19,6 +19,7 @@ class OpenGL {
         int windowWidth;
         int windowHeight;
         void drawRectangle(float, float, float, float);
+        void setRGBColor(int, int, int, float);
     public:
         OpenGL();
         ~OpenGL();
