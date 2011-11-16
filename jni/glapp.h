@@ -20,6 +20,7 @@ class OpenGL {
         int windowHeight;
         void drawRectangle(float, float, float, float);
         void setRGBColor(int, int, int, float);
+        void drawLine(float, float, float, float);
     public:
         OpenGL();
         ~OpenGL();

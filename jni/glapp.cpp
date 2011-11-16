@@ -45,7 +45,7 @@ void OpenGL::render()
     // Prepare OpenGL ES for rendering of the frame.
     this->prepareFrame();
     this->setRGBColor(255, 120, 0, 0);
-    this->drawRectangle(-0.5, 0, 1, 1);
+    this->drawLine(0, 0, 1, 1);
 }
 
 // Attention, x, height go from left to right, and y from top to bottom, since diagram
@@ -61,4 +61,16 @@ void OpenGL::drawRectangle(float x, float y, float height, float width)
 void OpenGL::setRGBColor(int red, int green, int blue, float transparency)
 {
     glColor4f((float)red/255, (float)green/255, (float)blue/255, transparency);
+}
+
+void OpenGL::drawLine(float p1x, float p1y, float p2x, float p2y)
+{
+    GLfloat vertices[] = {p1x,p1y, p2x,p2y};
+    glEnable(GL_LINE_SMOOTH); // Anti aliasing
+    glLineWidth(2.0f);
+    glVertexPointer(2, GL_FLOAT, 0, vertices);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glDrawArrays(GL_LINE_STRIP, 0, 2);
+    glDisableClientState(GL_VERTEX_ARRAY);
 }
