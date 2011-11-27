@@ -5,7 +5,7 @@
  * 
  * Copyright (c) Thomas Gummerer 2011 | All rights reserved
  */
-#include "glapp.h"
+#include "gllib.h"
 
 OpenGL::OpenGL()
 {
@@ -37,20 +37,8 @@ void OpenGL::resize(int w, int h)
 void OpenGL::prepareFrame()
 {
     glViewport(0, 0, windowWidth, windowHeight);
+    glClearColor(1,1,1,0);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-}
-
-void OpenGL::render()
-{
-    // Prepare OpenGL ES for rendering of the frame.
-    this->prepareFrame();
-    this->setRGBColor(255, 255, 255, 0);
-    this->drawLine(0.85, -0.9, 0.85, 0.9);
-    this->drawLine(-0.9, -0.85, 0.9, -0.85);
-    this->setRGBColor(120, 120, 255, 0);
-    this->drawRectangle(0.85, -0.83, -0.4, 0.2);
-    this->setRGBColor(255, 120, 120, 0);
-    this->drawRectangle(0.85, -0.81, -0.5, 0.2);
 }
 
 // Attention, x, height go from left to right, and y from top to bottom, since diagram

@@ -7,29 +7,29 @@
  */
 
 #include <jni.h>
-#include "glapp.h"
+#include "diagram.h"
 
 extern "C" {
 
-    static OpenGL * o;
+    static Diagram * d;
 
     void Java_com_tgummerer_DiagramView_nativeInit( JNIEnv * env ) 
     {
-        o = new OpenGL();
+        d = new Diagram();
     }
 
     void Java_com_tgummerer_DiagramView_nativeResize( JNIEnv * env, jobject thiz, jint w, jint h )
     {
-        o->resize(w, h);
+        d->resize(w, h);
     }
 
     void Java_com_tgummerer_DiagramView_nativeRender( JNIEnv * env )
     {
-        o->render();
+        d->render();
     }
 
     void Java_com_tgummerer_DiagramView_nativeDone( JNIEnv * env )
     {
-        delete o;
+        delete d;
     }
 }
