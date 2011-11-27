@@ -44,8 +44,13 @@ void OpenGL::render()
 {
     // Prepare OpenGL ES for rendering of the frame.
     this->prepareFrame();
-    this->setRGBColor(255, 120, 0, 0);
-    this->drawLine(0, 0, 1, 1);
+    this->setRGBColor(255, 255, 255, 0);
+    this->drawLine(0.85, -0.9, 0.85, 0.9);
+    this->drawLine(-0.9, -0.85, 0.9, -0.85);
+    this->setRGBColor(120, 120, 255, 0);
+    this->drawRectangle(0.85, -0.83, -0.4, 0.2);
+    this->setRGBColor(255, 120, 120, 0);
+    this->drawRectangle(0.85, -0.81, -0.5, 0.2);
 }
 
 // Attention, x, height go from left to right, and y from top to bottom, since diagram
@@ -54,7 +59,9 @@ void OpenGL::drawRectangle(float x, float y, float height, float width)
 {
     GLfloat vertices[] = {x+height,y, x,y+width, x+height,y+width, x+height,y, x,y, x,y+width };
     glVertexPointer(2, GL_FLOAT, 0, vertices);
+    glEnableClientState(GL_VERTEX_ARRAY);
     glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 // Set colors easier (0-255)
@@ -67,7 +74,7 @@ void OpenGL::drawLine(float p1x, float p1y, float p2x, float p2y)
 {
     GLfloat vertices[] = {p1x,p1y, p2x,p2y};
     glEnable(GL_LINE_SMOOTH); // Anti aliasing
-    glLineWidth(2.0f);
+    //glLineWidth(1.0f);
     glVertexPointer(2, GL_FLOAT, 0, vertices);
 
     glEnableClientState(GL_VERTEX_ARRAY);
