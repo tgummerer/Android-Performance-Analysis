@@ -10,10 +10,14 @@
 #define DIAGRAM_H
 
 #include "gllib.h"
+#include "connection.h"
 
 class Diagram {
     private:
         OpenGL * o;
+        Connection * c;
+        void drawAxis();
+        void drawBars();
     public:
         Diagram();
         ~Diagram();
