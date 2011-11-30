@@ -30,4 +30,9 @@ public class PerformanceAnalysisActivity extends Activity {
         Intent diagram = new Intent(PerformanceAnalysisActivity.this, DiagramActivity.class);
         startActivity(diagram);
     }
+    
+    public void monitorApps(View v) {
+    	Intent monitor = new Intent(PerformanceAnalysisActivity.this, MonitorActivity.class);
+    	startActivity(monitor);
+    }
 }

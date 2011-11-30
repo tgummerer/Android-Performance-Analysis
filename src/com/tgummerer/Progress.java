@@ -18,6 +18,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class Progress extends Activity {
+
+    private final int iterations = 1000;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,7 @@ public class Progress extends Activity {
     			algorithmEnded(progress[0], progress[1], progress[2]);
     		}
     	}
-    	
+
     	private void showProgress(long langID, long algorithmID, long time) {
     		Long[] array = new Long[3];
     		array[0] = langID;
@@ -107,31 +110,47 @@ public class Progress extends Activity {
     		showProgress(0, 1, 0);
     		// Using System.nanoTime instead of System.getTimeInMillis is more accurate
     		// according to http://stackoverflow.com/questions/1770010/how-do-i-measure-time-elapsed-in-java
-    		long startTime = System.nanoTime();
-    		
-    		// ALGORITHM
-    		for (int i = 0; i < 1000000; i++);
-    		// END ALGORITHM
-    		
-    		long endTime = System.nanoTime();
-    		showProgress(0, 1, endTime - startTime);
+            long[] times = new long[iterations];
+            for (int i = 0; i < iterations; i++) {
+                long startTime = System.nanoTime();
+                
+                // ALGORITHM
+                for (int j = 0; j < 1000000; j++);
+                // END ALGORITHM
+                
+                long endTime = System.nanoTime();
+                times[i] = endTime - startTime;
+            }
+            float average = 0;
+            for (int i = 0; i < iterations; i++) 
+                average += times[i] / iterations;
+
+    		showProgress(0, 1, (long)average);
     	}
 
         // Algorithm 2, Random quicksort of a backwards sorted array of size 10000
     	// If it wouldn't be random there is a high possibility of a stackoverflow
         private void sort() {
         	showProgress(0, 2, 0);
-    		long startTime = System.nanoTime();
-    		// ALGORITHM
-    		int[] arr = new int[1000];
-            for (int i = 0; i < arr.length; i++)
-                arr[i] = arr.length - i;
-            
-            quicksort(arr, 0, arr.length - 1);
-            // END ALGORITHM
-            
-            long endTime = System.nanoTime();
-    		showProgress(0, 2, endTime - startTime);
+            long[] times = new long[iterations];
+            for (int j = 0; j < iterations; j++) {
+                long startTime = System.nanoTime();
+                // ALGORITHM
+                int[] arr = new int[1000];
+                for (int i = 0; i < arr.length; i++)
+                    arr[i] = arr.length - i;
+                
+                quicksort(arr, 0, arr.length - 1);
+                // END ALGORITHM
+                
+                long endTime = System.nanoTime();
+                times[j] = endTime - startTime;
+            }
+            float average = 0;
+            for (int i = 0; i < iterations; i++) 
+                average += times[i] / iterations;
+
+    		showProgress(0, 2, (long)average);
         }
 
         private void quicksort(int arr[], int start, int end) {
@@ -170,12 +189,20 @@ public class Progress extends Activity {
         // but 350 didn't work), hence the small number.
         private void recursive() {
             showProgress(0, 3, 0);
-            long startTime = System.nanoTime();
+            long[] times = new long[iterations];
+            for (int j = 0; j < iterations; j++) {
+                long startTime = System.nanoTime();
 
-            recursive(325);
+                recursive(325);
 
-            long endTime = System.nanoTime();
-            showProgress(0, 3, endTime - startTime);
+                long endTime = System.nanoTime();
+                times[j] = endTime - startTime;
+            }
+            float average = 0;
+            for (int i = 0; i < iterations; i++) 
+                average += times[i] / iterations;
+
+    		showProgress(0, 3, (long)average);
         }
 
         private int recursive(int n) {
@@ -217,34 +244,58 @@ public class Progress extends Activity {
     		showProgress(1, 1, 0);
     		// Using System.nanoTime instead of System.getTimeInMillis is more accurate
     		// according to http://stackoverflow.com/questions/1770010/how-do-i-measure-time-elapsed-in-java
-    		long startTime = System.nanoTime();
-    		
-    		cforloop();
-    		
-    		long endTime = System.nanoTime();
-    		showProgress(1, 1, endTime - startTime);
+            long[] times = new long[iterations];
+            for (int j = 0; j < iterations; j++) {
+                long startTime = System.nanoTime();
+
+                cforloop();
+
+                long endTime = System.nanoTime();
+                times[j] = endTime - startTime;
+            }
+            float average = 0;
+            for (int i = 0; i < iterations; i++) 
+                average += times[i] / iterations;
+
+    		showProgress(1, 1, (long)average);
     	}
 
         // Algorithm 2, Random quicksort of a backwards sorted array of size 10000
     	// If it wouldn't be random there is a high possibility of a stackoverflow
         private void sort() {
         	showProgress(1, 2, 0);
-    		long startTime = System.nanoTime();
-    		csort();
-            
-            long endTime = System.nanoTime();
-    		showProgress(1, 2, endTime - startTime);
+            long[] times = new long[iterations];
+            for (int j = 0; j < iterations; j++) {
+                long startTime = System.nanoTime();
+                csort();
+
+                long endTime = System.nanoTime();
+                times[j] = endTime - startTime;
+            }
+            float average = 0;
+            for (int i = 0; i < iterations; i++) 
+                average += times[i] / iterations;
+
+            showProgress(1, 2, (long)average);
         }  
 
         // Algorithm 3
         private void recursive() {
             showProgress(1, 3, 0);
-            long startTime = System.nanoTime();
+            long[] times = new long[iterations];
+            for (int j = 0; j < iterations; j++) {
+                long startTime = System.nanoTime();
 
-            crecursive(325);
+                crecursive(325);
 
-            long endTime = System.nanoTime();
-            showProgress(1, 3, endTime - startTime);
+                long endTime = System.nanoTime();
+                times[j] = endTime - startTime;
+            }
+            float average = 0;
+            for (int i = 0; i < iterations; i++) 
+                average += times[i] / iterations;
+
+    		showProgress(1, 3, (long)average);
         }
             
     }
