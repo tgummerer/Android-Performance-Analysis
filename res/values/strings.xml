@@ -9,8 +9,10 @@
 <resources>
     <string name="app_name">Performance Analysis</string>
     <string name="home_start_tests">Start tests</string>
-    <string name="home_show_diagram">Show Diagram</string>
+    <string name="home_show_diagram">Show diagram</string>
     <string name="home_monitor_applications">Monitor apps</string>
     <string name="home_show_monitor_diagram">Show monitor diagram</string>
     <string name="home_credit">Icons by www.androidicons.com</string>
+    <string name="monitor_runningtasks">Running tasks</string>
+    <string name="monitor_runningservices">Running services</string>
 </resources>
