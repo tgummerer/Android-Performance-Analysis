@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/appimportance" />
+
+        <TextView 
+            android:layout_height="wrap_content" 
+            android:text="TextView" 
+            android:layout_weight="1" 
+            android:layout_width="100dp" 
+            android:id="@+id/appimportance" 
+            android:layout_marginRight="50dp"
+            android:gravity="right" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/memusage_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/monitor_memusage" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/dalvikpss" />
+
+        <TextView
+            android:id="@+id/dalvikpss"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:layout_weight="1"
+            android:text="TextView" 
+            android:gravity="right"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/dalvikprivatedirty" />
+
+        <TextView 
+            android:layout_height="wrap_content" 
+            android:text="TextView" 
+            android:layout_weight="1" 
+            android:layout_width="100dp" 
+            android:id="@+id/dalvikprivatedirty" 
+            android:layout_marginRight="50dp"
+            android:gravity="right" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/dalvikshareddirty" />
+
+        <TextView 
+            android:layout_height="wrap_content" 
+            android:text="TextView" 
+            android:layout_weight="1" 
+            android:layout_width="100dp" 
+            android:id="@+id/dalvikshareddirty" 
+            android:layout_marginRight="50dp"
+            android:gravity="right"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

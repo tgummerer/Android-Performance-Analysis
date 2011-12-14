@@ -3,26 +3,13 @@
 	android:layout_width="match_parent" android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<TextView android:id="@+id/monitor_runningTasks"
+	<TextView android:id="@+id/monitor_running"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:gravity="center" android:text="@string/monitor_runningtasks"
+        android:gravity="center" android:text="@string/monitor_running"
 		android:background="#35C" />
 
 	<ExpandableListView
-	    android:id="@+id/taskMonitorView"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" />
-
-	<TextView
-	    android:id="@+id/monitor_runningServices"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:gravity="center"
-	    android:text="@string/monitor_runningservices"
-	    android:background="#35C"  />
-
-	<ExpandableListView
-	    android:id="@+id/serviceMonitorView"
+	    android:id="@+id/monitorView"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" />
 </TableLayout>
