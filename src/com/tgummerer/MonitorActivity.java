@@ -13,10 +13,14 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Debug.MemoryInfo;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -40,6 +44,7 @@ public class MonitorActivity extends Activity {
         setContentView(R.layout.monitor);
         
         activityManager = (ActivityManager) this.getSystemService( ACTIVITY_SERVICE );
+        // Don't think there will ever be more then 65535 tasks or services running at once
         taskinfo = activityManager.getRunningTasks(65535).toArray();
         serviceinfo = activityManager.getRunningServices(65535).toArray();
 
@@ -55,8 +60,8 @@ public class MonitorActivity extends Activity {
     public class TaskMonitorAdapter extends BaseExpandableListAdapter {
 
     	@Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return null;
+		public ActivityManager.RunningTaskInfo getChild(int categoryPosition, int childPosition) {
+            return (RunningTaskInfo)taskinfo[categoryPosition];
         }
 
     	@Override
@@ -66,17 +71,32 @@ public class MonitorActivity extends Activity {
 
     	@Override
         public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-            return null;
+            if (convertView == null) {
+	            LayoutInflater inflater = (LayoutInflater) MonitorActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	            convertView = inflater.inflate(R.layout.monitortaskchild, null);
+	        }
+			TextView textView = (TextView) convertView.findViewById(R.id.tasknumactivities);
+	        textView.setText(String.valueOf(getChild(groupPosition, childPosition).numActivities));
+	        
+	        TextView textView2 = (TextView) convertView.findViewById(R.id.tasknumrunning);
+	        textView2.setText(String.valueOf(getGroup(groupPosition).numRunning));
+	        
+	        TextView memView = (TextView) convertView.findViewById(R.id.taskmemoryusage);
+	        int[] pid = {getGroup(groupPosition).id};
+	        MemoryInfo[] info = activityManager.getProcessMemoryInfo(pid);
+	        memView.setText(String.valueOf(info[0].otherPss));
+            return convertView;
         }
     	
     	@Override
         public int getChildrenCount(int groupPostion) {
-            return 0;
+            // One view as child
+            return 1;
         }
 
     	@Override
-        public Object getGroup(int categoryPosition) {
-            return taskinfo[categoryPosition];
+        public ActivityManager.RunningTaskInfo getGroup(int categoryPosition) {
+            return (RunningTaskInfo)taskinfo[categoryPosition];
         }
 
     	@Override
@@ -92,7 +112,7 @@ public class MonitorActivity extends Activity {
         @Override
         public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         	TextView textView = getGenericView();
-        	ComponentName cn = ((ActivityManager.RunningTaskInfo)getGroup(groupPosition)).baseActivity;
+        	ComponentName cn = getGroup(groupPosition).baseActivity;
 			textView.setText(cn.flattenToShortString());
 			return textView;
         }
@@ -143,8 +163,8 @@ public class MonitorActivity extends Activity {
         }
 
     	@Override
-        public Object getGroup(int categoryPosition) {
-            return serviceinfo[categoryPosition];
+        public ActivityManager.RunningServiceInfo getGroup(int categoryPosition) {
+            return (RunningServiceInfo)serviceinfo[categoryPosition];
         }
 
     	@Override
@@ -160,7 +180,7 @@ public class MonitorActivity extends Activity {
         @Override
         public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         	TextView textView = getGenericView();
-        	ComponentName cn = ((ActivityManager.RunningServiceInfo)getGroup(groupPosition)).service;
+        	ComponentName cn = getGroup(groupPosition).service;
 			textView.setText(cn.flattenToShortString());
 			return textView;
         }

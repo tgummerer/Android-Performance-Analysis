@@ -15,4 +15,7 @@
     <string name="home_credit">Icons by www.androidicons.com</string>
     <string name="monitor_runningtasks">Running tasks</string>
     <string name="monitor_runningservices">Running services</string>
+    <string name="monitor_childtask_noactivities">Total number of activities</string>
+    <string name="monitor_childtask_norunning">Number of running activities</string>
+    <string name="monitor_memusage">Memory usage</string>
 </resources>

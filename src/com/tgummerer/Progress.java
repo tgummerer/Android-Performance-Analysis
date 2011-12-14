@@ -66,7 +66,7 @@ public class Progress extends Activity {
     	values.put("algorithmid", algorithmID);
     	values.put("time", time);
     	db.insert("measurements", null, values);
-
+    	db.close();
     }
     
     private class Algorithms extends AsyncTask<Void, Long, Integer> {
