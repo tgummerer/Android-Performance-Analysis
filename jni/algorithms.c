@@ -1,6 +1,7 @@
 #include <jni.h>
 #include <stdlib.h> // For Random
 #include <sys/time.h> // For exact time measurements (Source: http://stackoverflow.com/questions/1861294/how-to-calculate-execution-time-of-a-code-snippet-in-c) Doesn't currently work correctly
+#include "classtest.h"
 
 #define ARRAY_LENGTH 1000
 
@@ -80,4 +81,11 @@ void Java_com_tgummerer_Progress_crecursive( JNIEnv * env, int n )
 {
     recursive(n);
     return;
+}
+
+void Java_com_tgummerer_Progress_cclassestest( JNIEnv * env )
+{
+    Chain * chain = new Chain(40);
+    chain.kill(3);
+    delete chain;
 }
