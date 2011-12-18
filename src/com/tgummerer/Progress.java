@@ -223,8 +223,8 @@ public class Progress extends Activity {
             for (int j = 0; j < iterations; j++) {
                 long startTime = System.nanoTime();
 
-                Chain chain = new Chain(40);
-                chain.kill(3);
+                Chain chain = new Chain(500);
+                chain.kill(250);
 
                 long endTime = System.nanoTime();
                 times[j] = endTime - startTime;

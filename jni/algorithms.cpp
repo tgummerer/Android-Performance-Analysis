@@ -4,19 +4,21 @@ extern "C" {
     #include <ctime>
     #include "classtest.h"
 
-    #define ARRAY_LENGTH 1000
+    #define ARRAY_LENGTH 500
 
     void quicksort( int[], int, int );
     void swap( int[], int, int );
 
     /* The functions return the time the algorithm took to run */
 
-    void Java_com_tgummerer_Progress_cforloop( JNIEnv * env ) 
+    float Java_com_tgummerer_Progress_cforloop( JNIEnv * env ) 
     {
 
-        clock_t start, finish;
         int i;
-        for(i = 0; i < 1000000; i++);
+        float k = 100000;
+        for(i = 0; i < 100000; i++)
+            k = k / i;
+        return k;
     }
 
     void  Java_com_tgummerer_Progress_csort( JNIEnv * env ) 
@@ -66,21 +68,21 @@ extern "C" {
     // Extra method call, to avoid passing the pointer to the JNIEnv each time.
     // May be only a small overhead, but may be quite significant
     long recursive( long n ) {
-        if (n == 1)
+        if (n < 2)
             return 1;
-        return recursive(n - 1);
+        return recursive(n - 1) + recursive(n - 2);
     }
 
-    void Java_com_tgummerer_Progress_crecursive( JNIEnv * env, int n )
+    void Java_com_tgummerer_Progress_crecursive( JNIEnv * env )
     {
-        recursive(n);
+        recursive(19);
         return;
     }
 
     void Java_com_tgummerer_Progress_cclassestest( JNIEnv * env )
     {
-        Chain * chain = new Chain(40);
-        chain->kill(3);
+        Chain * chain = new Chain(500);
+        chain->kill(250);
         delete chain;
     }
 }
