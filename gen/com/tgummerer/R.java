@@ -22,45 +22,63 @@ public final class R {
         public static final int starttests=0x7f020008;
     }
     public static final class id {
-        public static final int childrevenue=0x7f06000c;
-        public static final int childrevenuedate=0x7f06000d;
+        public static final int appimportance=0x7f06000a;
+        public static final int dalvikprivatedirty=0x7f06000f;
+        public static final int dalvikpss=0x7f06000d;
+        public static final int dalvikshareddirty=0x7f060011;
         public static final int home_btn_monitor_applications=0x7f060005;
         public static final int home_btn_show_diagram=0x7f060003;
         public static final int home_btn_show_monitor_app_diagram=0x7f060006;
         public static final int home_btn_start_tests=0x7f060002;
-        public static final int monitor_runningServices=0x7f06000a;
-        public static final int monitor_runningTasks=0x7f060008;
-        public static final int progress_textview=0x7f060012;
-        public static final int serviceMonitorView=0x7f06000b;
+        public static final int memusage_text=0x7f06000b;
+        public static final int monitorView=0x7f060009;
+        public static final int monitor_running=0x7f060008;
+        public static final int nativeprivatedirty=0x7f060015;
+        public static final int nativepss=0x7f060013;
+        public static final int nativeshareddirty=0x7f060017;
+        public static final int otherprivatedirty=0x7f06001b;
+        public static final int otherpss=0x7f060019;
+        public static final int othershareddirty=0x7f06001d;
+        public static final int progress_textview=0x7f06001e;
         public static final int tableRow1=0x7f060001;
         public static final int tableRow2=0x7f060004;
-        public static final int taskMonitorView=0x7f060009;
-        public static final int taskmemoryusage=0x7f060011;
-        public static final int tasknumactivities=0x7f06000e;
-        public static final int tasknumrunning=0x7f06000f;
         public static final int textView1=0x7f060000;
+        public static final int textView10=0x7f06001a;
+        public static final int textView11=0x7f06001c;
         public static final int textView2=0x7f060007;
-        public static final int textView3=0x7f060010;
+        public static final int textView3=0x7f06000c;
+        public static final int textView4=0x7f06000e;
+        public static final int textView5=0x7f060010;
+        public static final int textView6=0x7f060012;
+        public static final int textView7=0x7f060014;
+        public static final int textView8=0x7f060016;
+        public static final int textView9=0x7f060018;
     }
     public static final class layout {
         public static final int main=0x7f030000;
         public static final int monitor=0x7f030001;
-        public static final int monitorservicechild=0x7f030002;
-        public static final int monitortaskchild=0x7f030003;
-        public static final int progress=0x7f030004;
+        public static final int monitorchild=0x7f030002;
+        public static final int progress=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+        public static final int appimportance=0x7f040008;
+        public static final int dalvikprivatedirty=0x7f04000a;
+        public static final int dalvikpss=0x7f040009;
+        public static final int dalvikshareddirty=0x7f04000b;
         public static final int home_credit=0x7f040005;
         public static final int home_monitor_applications=0x7f040003;
         public static final int home_show_diagram=0x7f040002;
         public static final int home_show_monitor_diagram=0x7f040004;
         public static final int home_start_tests=0x7f040001;
-        public static final int monitor_childtask_noactivities=0x7f040008;
-        public static final int monitor_childtask_norunning=0x7f040009;
-        public static final int monitor_memusage=0x7f04000a;
-        public static final int monitor_runningservices=0x7f040007;
-        public static final int monitor_runningtasks=0x7f040006;
+        public static final int monitor_memusage=0x7f040007;
+        public static final int monitor_running=0x7f040006;
+        public static final int nativeprivatedirty=0x7f04000d;
+        public static final int nativepss=0x7f04000c;
+        public static final int nativeshareddirty=0x7f04000e;
+        public static final int otherprivatedirty=0x7f040010;
+        public static final int otherpss=0x7f04000f;
+        public static final int othershareddirty=0x7f040011;
     }
     public static final class style {
         public static final int DashboardButton=0x7f050000;

@@ -14,7 +14,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningServiceInfo;
-import android.app.ActivityManager.RunningTaskInfo;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
@@ -32,11 +32,9 @@ import android.widget.TextView;
 public class MonitorActivity extends Activity {
 
     private ExpandableListAdapter taskMonitorAdapter;
-    private ExpandableListAdapter serviceMonitorAdapter;
 
     private ActivityManager activityManager;
     Object[] taskinfo;
-    Object[] serviceinfo;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,23 +43,18 @@ public class MonitorActivity extends Activity {
         
         activityManager = (ActivityManager) this.getSystemService( ACTIVITY_SERVICE );
         // Don't think there will ever be more then 65535 tasks or services running at once
-        taskinfo = activityManager.getRunningTasks(65535).toArray();
-        serviceinfo = activityManager.getRunningServices(65535).toArray();
+        taskinfo = activityManager.getRunningAppProcesses().toArray();
 
-        taskMonitorAdapter = new TaskMonitorAdapter();
-        ExpandableListView listView = (ExpandableListView)findViewById(R.id.taskMonitorView);
+        taskMonitorAdapter = new MonitorAdapter();
+        ExpandableListView listView = (ExpandableListView)findViewById(R.id.monitorView);
         listView.setAdapter(taskMonitorAdapter); 
-        
-        serviceMonitorAdapter = new ServiceMonitorAdapter();
-        ExpandableListView serviceListView = (ExpandableListView)findViewById(R.id.serviceMonitorView);
-        serviceListView.setAdapter(serviceMonitorAdapter); 
 	}
 
-    public class TaskMonitorAdapter extends BaseExpandableListAdapter {
+    public class MonitorAdapter extends BaseExpandableListAdapter {
 
     	@Override
-		public ActivityManager.RunningTaskInfo getChild(int categoryPosition, int childPosition) {
-            return (RunningTaskInfo)taskinfo[categoryPosition];
+		public ActivityManager.RunningAppProcessInfo getChild(int categoryPosition, int childPosition) {
+            return (RunningAppProcessInfo)taskinfo[categoryPosition];
         }
 
     	@Override
@@ -73,19 +66,55 @@ public class MonitorActivity extends Activity {
         public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
             if (convertView == null) {
 	            LayoutInflater inflater = (LayoutInflater) MonitorActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	            convertView = inflater.inflate(R.layout.monitortaskchild, null);
+	            convertView = inflater.inflate(R.layout.monitorchild, null);
 	        }
-			TextView textView = (TextView) convertView.findViewById(R.id.tasknumactivities);
-	        textView.setText(String.valueOf(getChild(groupPosition, childPosition).numActivities));
+	        TextView textView = (TextView) convertView.findViewById(R.id.appimportance);
+	        textView.setText(getImportance(getGroup(groupPosition).importance));
 	        
-	        TextView textView2 = (TextView) convertView.findViewById(R.id.tasknumrunning);
-	        textView2.setText(String.valueOf(getGroup(groupPosition).numRunning));
-	        
-	        TextView memView = (TextView) convertView.findViewById(R.id.taskmemoryusage);
-	        int[] pid = {getGroup(groupPosition).id};
+	        int[] pid = {getGroup(groupPosition).pid};
 	        MemoryInfo[] info = activityManager.getProcessMemoryInfo(pid);
-	        memView.setText(String.valueOf(info[0].otherPss));
+
+	        TextView memView = (TextView) convertView.findViewById(R.id.dalvikpss);
+	        memView.setText(String.valueOf(info[0].dalvikPss));
+
+            memView = (TextView) convertView.findViewById(R.id.dalvikprivatedirty);
+            memView.setText(String.valueOf(info[0].dalvikPrivateDirty));
+
+            memView = (TextView) convertView.findViewById(R.id.dalvikshareddirty);
+            memView.setText(String.valueOf(info[0].dalvikSharedDirty));
+
+            memView = (TextView) convertView.findViewById(R.id.nativepss);
+            memView.setText(String.valueOf(info[0].nativePss));
+
+            memView = (TextView) convertView.findViewById(R.id.nativeprivatedirty);
+            memView.setText(String.valueOf(info[0].nativePrivateDirty));
+
+            memView = (TextView) convertView.findViewById(R.id.nativeshareddirty);
+            memView.setText(String.valueOf(info[0].nativeSharedDirty));
+
+            memView = (TextView) convertView.findViewById(R.id.otherpss);
+            memView.setText(String.valueOf(info[0].otherPss));
+
+            memView = (TextView) convertView.findViewById(R.id.otherprivatedirty);
+            memView.setText(String.valueOf(info[0].otherPrivateDirty));
+
+            memView = (TextView) convertView.findViewById(R.id.othershareddirty);
+            memView.setText(String.valueOf(info[0].otherSharedDirty));
+
             return convertView;
+        }
+
+        // Format importance in "human readable" format.
+        public String getImportance(int importance) {
+            switch (importance) {
+                case RunningAppProcessInfo.IMPORTANCE_BACKGROUND: return "Background";
+                case RunningAppProcessInfo.IMPORTANCE_EMPTY: return "Empty";
+                case RunningAppProcessInfo.IMPORTANCE_FOREGROUND: return "Foreground";
+                case RunningAppProcessInfo.IMPORTANCE_PERCEPTIBLE: return "Perceptible";
+                case RunningAppProcessInfo.IMPORTANCE_SERVICE: return "Service";
+                case RunningAppProcessInfo.IMPORTANCE_VISIBLE: return "Visible";
+            }
+            return "Other";
         }
     	
     	@Override
@@ -95,8 +124,8 @@ public class MonitorActivity extends Activity {
         }
 
     	@Override
-        public ActivityManager.RunningTaskInfo getGroup(int categoryPosition) {
-            return (RunningTaskInfo)taskinfo[categoryPosition];
+        public ActivityManager.RunningAppProcessInfo getGroup(int categoryPosition) {
+            return (RunningAppProcessInfo)taskinfo[categoryPosition];
         }
 
     	@Override
@@ -112,8 +141,7 @@ public class MonitorActivity extends Activity {
         @Override
         public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         	TextView textView = getGenericView();
-        	ComponentName cn = getGroup(groupPosition).baseActivity;
-			textView.setText(cn.flattenToShortString());
+			textView.setText(getGroup(groupPosition).processName);
 			return textView;
         }
         
@@ -136,73 +164,5 @@ public class MonitorActivity extends Activity {
         public boolean isChildSelectable(int groupPosition, int childPosition) {
             return true;
         }
-
-		
-    }
-    
-    public class ServiceMonitorAdapter extends BaseExpandableListAdapter {
-
-    	@Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return null;
-        }
-
-    	@Override
-    	public long getChildId(int groupPosition, int childPosition) {
-            return childPosition;
-        }
-
-    	@Override
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-            return null;
-        }
-    	
-    	@Override
-        public int getChildrenCount(int groupPostion) {
-            return 0;
-        }
-
-    	@Override
-        public ActivityManager.RunningServiceInfo getGroup(int categoryPosition) {
-            return (RunningServiceInfo)serviceinfo[categoryPosition];
-        }
-
-    	@Override
-        public int getGroupCount() {
-            return serviceinfo.length;
-        }
-
-        @Override
-        public long getGroupId(int categoryPosition) {
-            return categoryPosition;
-        }
-
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        	TextView textView = getGenericView();
-        	ComponentName cn = getGroup(groupPosition).service;
-			textView.setText(cn.flattenToShortString());
-			return textView;
-        }
-        
-        public TextView getGenericView(){
-			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 64);
-			TextView textView = new TextView(MonitorActivity.this);
-			textView.setLayoutParams(lp);
-			textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-			textView.setPadding(50, 0, 0, 0);
-			return textView;
-		}
-
-        
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return true;
-        }	
     }
 }
