@@ -81,6 +81,7 @@ public class Progress extends Activity {
     		forloop();
     		sort();
             recursive();
+            classesTest();
     		return 1;
     	}
     	
@@ -214,6 +215,27 @@ public class Progress extends Activity {
             return recursive(n - 1) + recursive(n - 2);
         }
 
+        // Algorithm 4, test from the web
+        // Source: http://blog.dhananjaynene.com/2008/07/performance-comparison-c-java-python-ruby-jython-jruby-groovy/
+        private void classesTest() {
+            showProgress(0, 4, 0);
+            long[] times = new long[iterations];
+            for (int j = 0; j < iterations; j++) {
+                long startTime = System.nanoTime();
+
+                Chain chain = new Chain(40);
+                chain.kill(3);
+
+                long endTime = System.nanoTime();
+                times[j] = endTime - startTime;
+            }
+            float average = 0;
+            for (int i = 0; i < iterations; i++)
+                average += times[i] / iterations;
+
+            showProgress(0, 4, (long)average);
+        }
+
     }
 
     private class CAlgorithms extends AsyncTask<Void, Long, Void> {
@@ -223,6 +245,7 @@ public class Progress extends Activity {
     		forloop();
     		sort();
             recursive();
+            classesTest();
     		return null;
     	}
     	
@@ -301,11 +324,31 @@ public class Progress extends Activity {
     		showProgress(1, 3, (long)average);
         }
             
+        // Algorithm 4, test from the web
+        // Source: http://blog.dhananjaynene.com/2008/07/performance-comparison-c-java-python-ruby-jython-jruby-groovy/
+        private void classesTest() {
+            showProgress(1, 4, 0);
+            long[] times = new long[iterations];
+            for (int j = 0; j < iterations; j++) {
+                long startTime = System.nanoTime();
+
+                cclassestest();
+
+                long endTime = System.nanoTime();
+                times[j] = endTime - startTime;
+            }
+            float average = 0;
+            for (int i = 0; i < iterations; i++)
+                average += times[i] / iterations;
+
+            showProgress(1, 4, (long)average);
+        }
     }
     
     public native float cforloop();
 	public native void csort();
     public native long crecursive();
+    public native void cclassestest();
     
     static {
         System.loadLibrary("algorithms");
