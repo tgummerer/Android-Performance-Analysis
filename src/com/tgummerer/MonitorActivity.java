@@ -82,6 +82,25 @@ public class MonitorActivity extends Activity {
 
             memView = (TextView) convertView.findViewById(R.id.dalvikshareddirty);
             memView.setText(String.valueOf(info[0].dalvikSharedDirty));
+
+            memView = (TextView) convertView.findViewById(R.id.nativepss);
+            memView.setText(String.valueOf(info[0].nativePss));
+
+            memView = (TextView) convertView.findViewById(R.id.nativeprivatedirty);
+            memView.setText(String.valueOf(info[0].nativePrivateDirty));
+
+            memView = (TextView) convertView.findViewById(R.id.nativeshareddirty);
+            memView.setText(String.valueOf(info[0].nativeSharedDirty));
+
+            memView = (TextView) convertView.findViewById(R.id.otherpss);
+            memView.setText(String.valueOf(info[0].otherPss));
+
+            memView = (TextView) convertView.findViewById(R.id.otherprivatedirty);
+            memView.setText(String.valueOf(info[0].otherPrivateDirty));
+
+            memView = (TextView) convertView.findViewById(R.id.othershareddirty);
+            memView.setText(String.valueOf(info[0].otherSharedDirty));
+
             return convertView;
         }
 
