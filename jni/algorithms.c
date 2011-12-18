@@ -2,25 +2,21 @@
 #include <stdlib.h> // For Random
 #include <sys/time.h> // For exact time measurements (Source: http://stackoverflow.com/questions/1861294/how-to-calculate-execution-time-of-a-code-snippet-in-c) Doesn't currently work correctly
 
-#define ARRAY_LENGTH 1000
+#define ARRAY_LENGTH 500
 
 void quicksort( int[], int, int );
 void swap( int[], int, int );
 
 /* The functions return the time the algorithm took to run */
 
-long Java_com_tgummerer_Progress_cforloop( JNIEnv * env ) 
+float Java_com_tgummerer_Progress_cforloop( JNIEnv * env ) 
 {
-
-    clock_t start, finish;
-    start = clock();
-
     int i;
-    for(i = 0; i < 1000000; i++);
+    float k = 100000;
+    for(i = 0; i < 100000; i++)
+        k = k / i;
 
-    finish = clock();
-
-    return finish - start;
+    return k;
 }
 
 int Java_com_tgummerer_Progress_csort( JNIEnv * env ) 
@@ -71,13 +67,14 @@ void swap( int arr[], int i, int k ) {
 // Extra method call, to avoid passing the pointer to the JNIEnv each time.
 // May be only a small overhead, but may be quite significant
 long recursive( long n ) {
-    if (n == 1)
+    if (n < 2)
         return 1;
-    return recursive(n - 1);
+    long a = recursive(n - 1);
+    long b = recursive(n - 2);
+    return a + b;
 }
 
-void Java_com_tgummerer_Progress_crecursive( JNIEnv * env, int n )
+long Java_com_tgummerer_Progress_crecursive( JNIEnv * env )
 {
-    recursive(n);
-    return;
+    return recursive(19);
 }

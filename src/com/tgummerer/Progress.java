@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 public class Progress extends Activity {
 
-    private final int iterations = 1000;
+    private final int iterations = 100;
 
     /** Called when the activity is first created. */
     @Override
@@ -34,6 +34,7 @@ public class Progress extends Activity {
         
         Algorithms alg = new Algorithms();
         alg.execute((Void[])null);
+        db.close();
 	}
     
     public void executeCAlgorithms() {
@@ -115,7 +116,9 @@ public class Progress extends Activity {
                 long startTime = System.nanoTime();
                 
                 // ALGORITHM
-                for (int j = 0; j < 1000000; j++);
+                float k = 100000;
+                for (int j = 0; j < 100000; j++)
+                    k = k / j;
                 // END ALGORITHM
                 
                 long endTime = System.nanoTime();
@@ -136,7 +139,7 @@ public class Progress extends Activity {
             for (int j = 0; j < iterations; j++) {
                 long startTime = System.nanoTime();
                 // ALGORITHM
-                int[] arr = new int[1000];
+                int[] arr = new int[500];
                 for (int i = 0; i < arr.length; i++)
                     arr[i] = arr.length - i;
                 
@@ -193,7 +196,7 @@ public class Progress extends Activity {
             for (int j = 0; j < iterations; j++) {
                 long startTime = System.nanoTime();
 
-                recursive(325);
+                recursive(19);
 
                 long endTime = System.nanoTime();
                 times[j] = endTime - startTime;
@@ -205,10 +208,10 @@ public class Progress extends Activity {
     		showProgress(0, 3, (long)average);
         }
 
-        private int recursive(int n) {
-            if (n == 1)
+        private long recursive(long n) {
+            if (n < 2)
                 return 1;
-            return recursive(n - 1);
+            return recursive(n - 1) + recursive(n - 2);
         }
 
     }
@@ -286,7 +289,7 @@ public class Progress extends Activity {
             for (int j = 0; j < iterations; j++) {
                 long startTime = System.nanoTime();
 
-                crecursive(325);
+                crecursive();
 
                 long endTime = System.nanoTime();
                 times[j] = endTime - startTime;
@@ -300,9 +303,9 @@ public class Progress extends Activity {
             
     }
     
-    public native long cforloop();
+    public native float cforloop();
 	public native void csort();
-    public native void crecursive(int n);
+    public native long crecursive();
     
     static {
         System.loadLibrary("algorithms");
