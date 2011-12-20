@@ -22,6 +22,7 @@ public final class R {
         public static final int starttests=0x7f020008;
     }
     public static final class id {
+        public static final int appName=0x7f06001e;
         public static final int appimportance=0x7f06000a;
         public static final int dalvikprivatedirty=0x7f06000f;
         public static final int dalvikpss=0x7f06000d;
@@ -30,6 +31,7 @@ public final class R {
         public static final int home_btn_show_diagram=0x7f060003;
         public static final int home_btn_show_monitor_app_diagram=0x7f060006;
         public static final int home_btn_start_tests=0x7f060002;
+        public static final int memUsage=0x7f06001f;
         public static final int memusage_text=0x7f06000b;
         public static final int monitorView=0x7f060009;
         public static final int monitor_running=0x7f060008;
@@ -39,7 +41,7 @@ public final class R {
         public static final int otherprivatedirty=0x7f06001b;
         public static final int otherpss=0x7f060019;
         public static final int othershareddirty=0x7f06001d;
-        public static final int progress_textview=0x7f06001e;
+        public static final int progress_textview=0x7f060020;
         public static final int tableRow1=0x7f060001;
         public static final int tableRow2=0x7f060004;
         public static final int textView1=0x7f060000;
@@ -58,7 +60,8 @@ public final class R {
         public static final int main=0x7f030000;
         public static final int monitor=0x7f030001;
         public static final int monitorchild=0x7f030002;
-        public static final int progress=0x7f030003;
+        public static final int monitorgroup=0x7f030003;
+        public static final int progress=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f040000;

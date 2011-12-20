@@ -8,13 +8,19 @@
 
 package com.tgummerer;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningServiceInfo;
-import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
@@ -34,7 +40,8 @@ public class MonitorActivity extends Activity {
     private ExpandableListAdapter taskMonitorAdapter;
 
     private ActivityManager activityManager;
-    Object[] taskinfo;
+    private Object[] taskinfo;
+    private int totalMem;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,12 +49,28 @@ public class MonitorActivity extends Activity {
         setContentView(R.layout.monitor);
         
         activityManager = (ActivityManager) this.getSystemService( ACTIVITY_SERVICE );
-        // Don't think there will ever be more then 65535 tasks or services running at once
         taskinfo = activityManager.getRunningAppProcesses().toArray();
 
         taskMonitorAdapter = new MonitorAdapter();
         ExpandableListView listView = (ExpandableListView)findViewById(R.id.monitorView);
         listView.setAdapter(taskMonitorAdapter); 
+
+        FileInputStream fstream;
+        try {
+            fstream = new FileInputStream("/proc/meminfo");
+
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            String totalText = br.readLine();
+            String[] tmp = totalText.split(" ");
+            totalMem = Integer.valueOf(tmp[tmp.length - 2]);
+            // Exceptions that shouldn't happen
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
     public class MonitorAdapter extends BaseExpandableListAdapter {
@@ -140,9 +163,21 @@ public class MonitorActivity extends Activity {
 
         @Override
         public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        	TextView textView = getGenericView();
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) MonitorActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.monitorgroup, null);
+            }
+        	TextView textView = (TextView) convertView.findViewById(R.id.appName);
 			textView.setText(getGroup(groupPosition).processName);
-			return textView;
+
+            int[] pid = {getGroup(groupPosition).pid};
+	        MemoryInfo[] info = activityManager.getProcessMemoryInfo(pid);
+
+            textView = (TextView) convertView.findViewById(R.id.memUsage);
+            DecimalFormat df = new DecimalFormat("###.##%");
+            textView.setText(String.valueOf(df.format((float)info[0].getTotalPss()/totalMem)));
+
+            return convertView;
         }
         
         public TextView getGenericView(){

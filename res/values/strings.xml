@@ -19,7 +19,7 @@
     <string name="dalvikpss">Dalvik Pss</string>
     <string name="dalvikprivatedirty">Dalvik Private Dirty</string>
     <string name="dalvikshareddirty">Dalvik Shared Dirty</string>
-    <string name="nativepss">Dalvik Pss</string>
+    <string name="nativepss">Native Pss</string>
     <string name="nativeprivatedirty">Native Private Dirty</string>
     <string name="nativeshareddirty">Native Shared Dirty</string>
     <string name="otherpss">Other Pss</string>
