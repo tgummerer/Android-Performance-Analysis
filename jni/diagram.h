@@ -11,6 +11,8 @@
 
 #include "gllib.h"
 #include "connection.h"
+#include <ft2build.h>
+#include FT_FREETYPE_H 
 
 #define LEFT       -0.85
 #define RIGHT       0.85
@@ -26,6 +28,7 @@ class Diagram {
         Connection * c;
         void drawAxis();
         void drawBars();
+        void drawLegend();
         float val(float);
     public:
         Diagram();

@@ -9,6 +9,9 @@
 /Users/tommy/Documents/workspace/PerformanceAnalysis/res/drawable-hdpi/starttests.png \
 /Users/tommy/Documents/workspace/PerformanceAnalysis/res/drawable-mdpi/icon.png \
 /Users/tommy/Documents/workspace/PerformanceAnalysis/res/layout/main.xml \
+/Users/tommy/Documents/workspace/PerformanceAnalysis/res/layout/monitor.xml \
+/Users/tommy/Documents/workspace/PerformanceAnalysis/res/layout/monitorchild.xml \
+/Users/tommy/Documents/workspace/PerformanceAnalysis/res/layout/monitorgroup.xml \
 /Users/tommy/Documents/workspace/PerformanceAnalysis/res/layout/progress.xml \
 /Users/tommy/Documents/workspace/PerformanceAnalysis/res/values/strings.xml \
 /Users/tommy/Documents/workspace/PerformanceAnalysis/res/values/styles.xml \

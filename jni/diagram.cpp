@@ -33,6 +33,7 @@ void Diagram::render()
     o->prepareFrame();
     this->drawAxis();
     this->drawBars();
+    this->drawLegend();
 }
 
 void Diagram::drawAxis()
@@ -70,11 +71,20 @@ void Diagram::drawBars()
         if (langid == 1)
             o->setRGBColor(120, 120, 255, 0);
         else
-            o->setRGBColor(255, 120, 120, 1);
+            o->setRGBColor(255, 120, 120, 0);
 
-        o->drawRectangle(BOTTOM, LEFT + (float)(i + 1) * DISTANCE + (i / 2) * barwidth, MAX_HEIGHT / maxtime * atoi((char *)sqlite3_column_text(pstmt, 2)), barwidth);
+        o->drawRectangle(BOTTOM, RIGHT - ((float)(i + 3 - langid * 2) * DISTANCE + ((i / 2) + 1) * barwidth), MAX_HEIGHT / maxtime * atoi((char *)sqlite3_column_text(pstmt, 2)), barwidth);
 
     }
+}
+
+void Diagram::drawLegend()
+{
+    o->setRGBColor(255, 120, 120, 0);
+    o->drawRectangle(BOTTOM + MAX_HEIGHT, LEFT + 0.1, 0.1, 0.065);
+
+    o->setRGBColor(120, 120, 255, 0);
+    o->drawRectangle(BOTTOM + MAX_HEIGHT + 0.2, LEFT + 0.1, 0.1, 0.065);
 }
 
 float Diagram::val(float f)
