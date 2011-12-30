@@ -15,14 +15,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
-import java.util.List;
 
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
-import android.app.ActivityManager.RunningServiceInfo;
-import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug.MemoryInfo;
 import android.view.Gravity;
@@ -31,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -124,6 +123,16 @@ public class MonitorActivity extends Activity {
             memView = (TextView) convertView.findViewById(R.id.othershareddirty);
             memView.setText(String.valueOf(info[0].otherSharedDirty));
 
+            final Button monitorPssButton = (Button) convertView.findViewById(R.id.monitorpss);
+            monitorPssButton.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    Intent intent = new Intent(MonitorActivity.this, MonitorService.class);
+                    //intent.putExtra("1", 1);
+                    startService(intent);
+                }
+            });
+
             return convertView;
         }
 
@@ -170,7 +179,7 @@ public class MonitorActivity extends Activity {
         	TextView textView = (TextView) convertView.findViewById(R.id.appName);
 			textView.setText(getGroup(groupPosition).processName);
 
-            int[] pid = {getGroup(groupPosition).pid};
+			int[] pid = {getGroup(groupPosition).pid};
 	        MemoryInfo[] info = activityManager.getProcessMemoryInfo(pid);
 
             textView = (TextView) convertView.findViewById(R.id.memUsage);

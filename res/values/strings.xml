@@ -25,4 +25,7 @@
     <string name="otherpss">Other Pss</string>
     <string name="otherprivatedirty">Other Private Dirty</string>
     <string name="othershareddirty">Other Shared Dirty</string>
+    <string name="monitorpss">Monitor Pss Usage</string>
+    <string name="monitorprivate">Monitor Private Mem Usage</string>
+    <string name="monitorshared">Monitor Shared Mem Usage</string>
 </resources>
