@@ -8,21 +8,23 @@
 
 package com.tgummerer;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import android.app.Service;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
-import android.widget.Toast;
 
 public class MonitorService extends Service {
+
+    private int pid = 0;
+    private int type = 0;
+    private ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Toast.makeText(this, "Service created", Toast.LENGTH_SHORT).show();
-        System.out.println("bla");
-        Log.println(1, "bla", "hallo");
     }
 
     @Override
@@ -35,15 +37,28 @@ public class MonitorService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId)
     {
         super.onStartCommand(intent, flags, startId);
-        Bundle extras = intent.getExtras();
-        int bla = 0;
-        if (extras != null)
-            bla = extras.getInt("1");
+        //Bundle extras = intent.getExtras();
+        //if (extras != null) {
+        //    pid = extras.getInt("pid");
+        //    type = extras.getInt("type");
+        //}
 
-        //Toast.makeText(this, "Service started", Toast.LENGTH_SHORT).show();
-        System.out.println("hallo");
-        Log.println(1, "bla", String.valueOf(bla));
-        return 0;
+        //t = new Thread(new MonitorThread(pid, type));
+        //t.start();
+        executor.scheduleAtFixedRate(new Runnable() {
+            public void run() {
+                System.out.println("test");
+            }
+        },0, 1, TimeUnit.SECONDS);
+        // Run the service until it is explicitly stopped
+        return START_STICKY;
     }
+    
 
+    @Override
+    public void onDestroy()
+    {
+        System.out.println("Stop thread");
+        executor.shutdownNow();
+    }
 }

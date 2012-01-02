@@ -33,6 +33,7 @@ import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MonitorActivity extends Activity {
 
@@ -41,7 +42,9 @@ public class MonitorActivity extends Activity {
     private ActivityManager activityManager;
     private Object[] taskinfo;
     private int totalMem;
-
+    
+    private static int servicetype = 0;
+    private static int servicepid = 0;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -93,7 +96,7 @@ public class MonitorActivity extends Activity {
 	        TextView textView = (TextView) convertView.findViewById(R.id.appimportance);
 	        textView.setText(getImportance(getGroup(groupPosition).importance));
 	        
-	        int[] pid = {getGroup(groupPosition).pid};
+	        final int[] pid = {getGroup(groupPosition).pid};
 	        MemoryInfo[] info = activityManager.getProcessMemoryInfo(pid);
 
 	        TextView memView = (TextView) convertView.findViewById(R.id.dalvikpss);
@@ -124,15 +127,41 @@ public class MonitorActivity extends Activity {
             memView.setText(String.valueOf(info[0].otherSharedDirty));
 
             final Button monitorPssButton = (Button) convertView.findViewById(R.id.monitorpss);
-            monitorPssButton.setOnClickListener(new View.OnClickListener() {
+            if (servicepid == 0) {
+                monitorPssButton.setText("Monitor Pss Usage");
+                
+                monitorPssButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                    	if (servicetype != 0) 
+                            Toast.makeText(MonitorActivity.this, "Only one monitor service can run at the same time. Please stop the other service befor starting a new one.", Toast.LENGTH_LONG).show();
+                        else {
+	                        Intent intent = new Intent(MonitorActivity.this, MonitorService.class);
+	                        intent.putExtra("pid", pid[0]);
+	                        servicepid = pid[0];
+	                        servicetype = 1;
+	                        MonitorAdapter.this.notifyDataSetChanged();
+	                        startService(intent);
+                        }
+                    }
+                });
+                
+            } else if (servicetype == 1) {
+                if (servicepid == pid[0])
+                    monitorPssButton.setText("Stop monitoring Pss Usage");
+                else
+                    monitorPssButton.setText("Stop monitoring Pss Usage of app with pid " + servicepid);
+                monitorPssButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MonitorActivity.this, MonitorService.class);
+                        intent.putExtra("pid", pid[0]);
+                        servicepid = 0;
+                        servicetype = 0;
+                        MonitorAdapter.this.notifyDataSetChanged();
 
-                public void onClick(View v) {
-                    Intent intent = new Intent(MonitorActivity.this, MonitorService.class);
-                    //intent.putExtra("1", 1);
-                    startService(intent);
-                }
-            });
-
+                        stopService(intent);
+                    }
+                });
+            }
             return convertView;
         }
 
