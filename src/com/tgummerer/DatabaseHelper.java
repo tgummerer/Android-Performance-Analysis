@@ -11,7 +11,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			"langid integer, " +
 			"algorithmid integer, " +
 			"time long);";
-	private final static int dbversion = 1;
+    private final String createString2 = "create table monitor " +
+            "(id integer primary key autoincrement, " +
+            "type integer, " +
+            "pid integer, " +
+            "memusage integer);";
+	private final static int dbversion = 2;
 	private final static String dbname = "PerformanceAnalysis";
 	public DatabaseHelper(Context context) {
 		super(context, dbname, null, dbversion);
@@ -20,13 +25,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(createString);
-		db.close();
+        db.execSQL(createString2);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("drop table if exists measurements");
+        db.execSQL("drop table if exists monitor");
 		onCreate(db);
-		db.close();
 	}
 }

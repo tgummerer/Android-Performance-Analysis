@@ -45,12 +45,13 @@ public class MonitorActivity extends Activity {
     
     private static int servicetype = 0;
     private static int servicepid = 0;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.monitor);
         
-        activityManager = (ActivityManager) this.getSystemService( ACTIVITY_SERVICE );
+        activityManager = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
         taskinfo = activityManager.getRunningAppProcesses().toArray();
 
         taskMonitorAdapter = new MonitorAdapter();
@@ -137,6 +138,7 @@ public class MonitorActivity extends Activity {
                         else {
 	                        Intent intent = new Intent(MonitorActivity.this, MonitorService.class);
 	                        intent.putExtra("pid", pid[0]);
+                            intent.putExtra("type", 1);
 	                        servicepid = pid[0];
 	                        servicetype = 1;
 	                        MonitorAdapter.this.notifyDataSetChanged();
@@ -153,7 +155,80 @@ public class MonitorActivity extends Activity {
                 monitorPssButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent intent = new Intent(MonitorActivity.this, MonitorService.class);
-                        intent.putExtra("pid", pid[0]);
+                        servicepid = 0;
+                        servicetype = 0;
+                        MonitorAdapter.this.notifyDataSetChanged();
+
+                        stopService(intent);
+                    }
+                });
+            }
+
+            final Button monitorPrivateButton = (Button) convertView.findViewById(R.id.monitorprivate);
+            if (servicepid == 0) {
+                monitorPrivateButton.setText("Monitor Private Mem Usage");
+                
+                monitorPrivateButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                    	if (servicetype != 0) 
+                            Toast.makeText(MonitorActivity.this, "Only one monitor service can run at the same time. Please stop the other service befor starting a new one.", Toast.LENGTH_LONG).show();
+                        else {
+	                        Intent intent = new Intent(MonitorActivity.this, MonitorService.class);
+	                        intent.putExtra("pid", pid[0]);
+                            intent.putExtra("type", 2);
+	                        servicepid = pid[0];
+	                        servicetype = 2;
+	                        MonitorAdapter.this.notifyDataSetChanged();
+	                        startService(intent);
+                        }
+                    }
+                });
+                
+            } else if (servicetype == 2) {
+                if (servicepid == pid[0])
+                    monitorPrivateButton.setText("Stop monitoring Private Mem Usage");
+                else
+                    monitorPrivateButton.setText("Stop monitoring Private Mem Usage of app with pid " + servicepid);
+                monitorPrivateButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MonitorActivity.this, MonitorService.class);
+                        servicepid = 0;
+                        servicetype = 0;
+                        MonitorAdapter.this.notifyDataSetChanged();
+
+                        stopService(intent);
+                    }
+                });
+            }
+
+            final Button monitorSharedButton = (Button) convertView.findViewById(R.id.monitorshared);
+            if (servicepid == 0) {
+                monitorSharedButton.setText("Monitor Shared Mem Usage");
+                
+                monitorSharedButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                    	if (servicetype != 0) 
+                            Toast.makeText(MonitorActivity.this, "Only one monitor service can run at the same time. Please stop the other service befor starting a new one.", Toast.LENGTH_LONG).show();
+                        else {
+	                        Intent intent = new Intent(MonitorActivity.this, MonitorService.class);
+	                        intent.putExtra("pid", pid[0]);
+                            intent.putExtra("type", 3);
+	                        servicepid = pid[0];
+	                        servicetype = 3;
+	                        MonitorAdapter.this.notifyDataSetChanged();
+	                        startService(intent);
+                        }
+                    }
+                });
+                
+            } else if (servicetype == 3) {
+                if (servicepid == pid[0])
+                    monitorSharedButton.setText("Stop monitoring Shared Mem Usage");
+                else
+                    monitorSharedButton.setText("Stop monitoring Shared Mem Usage of app with pid " + servicepid);
+                monitorSharedButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MonitorActivity.this, MonitorService.class);
                         servicepid = 0;
                         servicetype = 0;
                         MonitorAdapter.this.notifyDataSetChanged();
