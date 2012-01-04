@@ -57,6 +57,8 @@ void MonitorDiagram::drawBars()
     if (sqlite3_step(pstmt) == SQLITE_ROW)
         minmem = atoi((char *)sqlite3_column_text(pstmt, 0));
 
+    maxmem -= minmem;
+
     const char countquery[60] = "select count(*) from monitor";
     pstmt = c->prepare(countquery);
     int steps = 0;
@@ -69,6 +71,7 @@ void MonitorDiagram::drawBars()
     if (sqlite3_step(pstmt) == SQLITE_ROW)
         prevmem = atoi((char *)sqlite3_column_text(pstmt, 0));
 
+    prevmem -= minmem;
     float stepwidth = ((this->val(LEFT) + this->val(RIGHT) - 2 * BORDERS)) / (steps);
     
     int i = 0;
@@ -78,9 +81,10 @@ void MonitorDiagram::drawBars()
             break; // Should never happen, just for safety
 
         int memusage = atoi((char *)sqlite3_column_text(pstmt, 0));
+        memusage -= minmem;
         o->setRGBColor(120, 120, 255, 0);
 
-        o->drawLine(((float)MAX_HEIGHT / maxmem * prevmem) + BOTTOM, (float)(i) * stepwidth + LEFT + BORDERS, ((float)MAX_HEIGHT / maxmem * memusage) + BOTTOM, (float)(i + 1) * stepwidth + LEFT + BORDERS);
+        o->drawLine(((float)(MAX_HEIGHT + BORDERS * 2) / maxmem * prevmem) + BOTTOM - BORDERS, (float)(i) * stepwidth + LEFT + BORDERS, ((float)(MAX_HEIGHT + BORDERS * 2) / maxmem * memusage) + BOTTOM - BORDERS, (float)(i + 1) * stepwidth + LEFT + BORDERS);
         prevmem = memusage;
     }
 }
