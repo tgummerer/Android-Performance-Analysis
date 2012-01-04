@@ -6,8 +6,8 @@
  * Copyright (c) Thomas Gummerer 2011 | All rights reserved
  */
 
-#ifndef DIAGRAM_H
-#define DIAGRAM_H
+#ifndef MONITORDIAGRAM_H
+#define MONITORDIAGRAM_H
 
 #include "gllib.h"
 #include "connection.h"
@@ -18,19 +18,18 @@
 #define BOTTOM      0.85
 #define MAX_HEIGHT -1.7
 
-#define DISTANCE    0.02
+#define BORDERS 0.05
 
-class Diagram {
+class MonitorDiagram {
     private:
         OpenGL * o;
         Connection * c;
         void drawAxis();
         void drawBars();
-        void drawLegend();
         float val(float);
     public:
-        Diagram();
-        ~Diagram();
+        MonitorDiagram();
+        ~MonitorDiagram();
         void resize(int, int);
         void render();
 };

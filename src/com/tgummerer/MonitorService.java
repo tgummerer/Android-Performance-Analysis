@@ -43,6 +43,10 @@ public class MonitorService extends Service {
     {
         super.onStartCommand(intent, flags, startId);
         Bundle extras = intent.getExtras();
+        DatabaseHelper dbHelper = new DatabaseHelper(MonitorService.this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete("monitor", null, null);
+        db.close();
         if (extras != null) {
             int[] pid = {extras.getInt("pid")};
             this.pid = pid;

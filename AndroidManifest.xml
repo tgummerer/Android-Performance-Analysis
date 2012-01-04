@@ -16,6 +16,7 @@
         <activity android:name=".Progress"></activity>
         <activity android:name=".DiagramActivity"></activity>
         <activity android:name=".MonitorActivity"></activity>            
+        <activity android:name=".MonitorDiagramActivity"></activity>            
         <service android:name="com.tgummerer.MonitorService"></service>
     </application>
     <uses-permission android:name="android.permission.GET_TASKS" />

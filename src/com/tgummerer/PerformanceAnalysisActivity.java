@@ -19,6 +19,8 @@ public class PerformanceAnalysisActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        // Initialize database
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
     }
     
     public void startTests(View v) {
@@ -34,5 +36,10 @@ public class PerformanceAnalysisActivity extends Activity {
     public void monitorApps(View v) {
     	Intent monitor = new Intent(PerformanceAnalysisActivity.this, MonitorActivity.class);
     	startActivity(monitor);
+    }
+
+    public void showMonitorDiagram(View v) {
+        Intent monitorDiagram = new Intent(PerformanceAnalysisActivity.this, MonitorDiagramActivity.class);
+        startActivity(monitorDiagram);
     }
 }

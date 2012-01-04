@@ -62,7 +62,7 @@ void OpenGL::drawLine(float p1x, float p1y, float p2x, float p2y)
 {
     GLfloat vertices[] = {p1x,p1y, p2x,p2y};
     glEnable(GL_LINE_SMOOTH); // Anti aliasing
-    //glLineWidth(1.0f);
+    glLineWidth(1.0f);
     glVertexPointer(2, GL_FLOAT, 0, vertices);
 
     glEnableClientState(GL_VERTEX_ARRAY);
