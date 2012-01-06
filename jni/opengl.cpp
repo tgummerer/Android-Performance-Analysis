@@ -8,6 +8,7 @@
 
 #include <jni.h>
 #include "diagram.h"
+#include <android/log.h>
 
 extern "C" {
 
@@ -30,6 +31,7 @@ extern "C" {
 
     void Java_com_tgummerer_DiagramView_nativeDone( JNIEnv * env )
     {
+        __android_log_print(ANDROID_LOG_DEBUG, "native", "nativeDone");  
         delete d;
     }
 }
