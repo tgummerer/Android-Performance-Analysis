@@ -28,4 +28,13 @@
     <string name="monitorpss">Monitor Pss Usage</string>
     <string name="monitorprivate">Monitor Private Mem Usage</string>
     <string name="monitorshared">Monitor Shared Mem Usage</string>
+    <string name="home_show_stats">Show statistics</string>
+    <string name="avg_difference">Average difference</string>
+    <string name="max_difference">Maximum difference</string>
+    <string name="min_difference">Minimum difference</string>
+    <string name="select_tests">Select tests</string>
+    <string name="algorithm1">Algorithm 1: For loop with a division operation</string>
+    <string name="algorithm2">Algorithm 2: Random Quicksort</string>
+    <string name="algorithm3">Algorithm 3: Recursive function</string>
+    <string name="algorithm4">Algorithm 4: Algorithm with classes and pointers</string>
 </resources>

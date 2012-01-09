@@ -132,7 +132,7 @@ public class Progress extends Activity {
     		showProgress(0, 1, (long)average);
     	}
 
-        // Algorithm 2, Random quicksort of a backwards sorted array of size 10000
+        // Algorithm 2, Random quicksort of a backwards sorted array
     	// If it wouldn't be random there is a high possibility of a stackoverflow
         private void sort() {
         	showProgress(0, 2, 0);

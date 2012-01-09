@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center">
+    <CheckBox
+        android:id="@+id/algorithm1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/algorithm1" />
+    <CheckBox
+        android:id="@+id/algorithm2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/algorithm2" />
+    <CheckBox
+        android:id="@+id/algorithm3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/algorithm3" />
+    <CheckBox
+        android:id="@+id/algorithm4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/algorithm4" />
+ 
+   <TableRow
+        android:gravity="center"
+        android:id="@+id/tableRow1"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+    </TableRow>
+
+</TableLayout>

@@ -42,4 +42,14 @@ public class PerformanceAnalysisActivity extends Activity {
         Intent monitorDiagram = new Intent(PerformanceAnalysisActivity.this, MonitorDiagramActivity.class);
         startActivity(monitorDiagram);
     }
+
+    public void showStats(View v) {
+        Intent stats = new Intent(PerformanceAnalysisActivity.this, StatsActivity.class);
+        startActivity(stats);
+    }
+
+    public void selectTests(View v) {
+        Intent tests = new Intent(PerformanceAnalysisActivity.this, SelectTestsActivity.class);
+        startActivity(tests);
+    }
 }
