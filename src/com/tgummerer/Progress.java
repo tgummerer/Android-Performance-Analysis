@@ -12,6 +12,7 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 public class Progress extends Activity {
 
     private final int iterations = 100;
+    private String PREFS_NAME = "ALGORITHMS";
 
     /** Called when the activity is first created. */
     @Override
@@ -78,10 +80,15 @@ public class Progress extends Activity {
     	
     	@Override
     	protected Integer doInBackground(Void... params) {
-    		forloop();
-    		sort();
-            recursive();
-            classesTest();
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            if (settings.getBoolean("algorithm1", true)) 
+                forloop();
+            if (settings.getBoolean("algorithm2", true)) 
+                sort();
+            if (settings.getBoolean("algorithm3", true)) 
+                recursive();
+            if (settings.getBoolean("algorithm4", true)) 
+                classesTest();
     		return 1;
     	}
     	
@@ -242,10 +249,15 @@ public class Progress extends Activity {
     	
     	@Override
     	protected Void doInBackground(Void... params) {
-    		forloop();
-    		sort();
-            recursive();
-            classesTest();
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            if (settings.getBoolean("algorithm1", true)) 
+                forloop();
+            if (settings.getBoolean("algorithm2", true)) 
+                sort();
+            if (settings.getBoolean("algorithm3", true)) 
+                recursive();
+            if (settings.getBoolean("algorithm4", true)) 
+                classesTest();
     		return null;
     	}
     	

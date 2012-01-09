@@ -23,8 +23,6 @@
             android:id="@+id/appimportance" 
             android:gravity="right" />
 
-
-
     </LinearLayout>
     <TextView
         android:id="@+id/memusage_text"

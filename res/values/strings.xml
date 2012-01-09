@@ -37,4 +37,6 @@
     <string name="algorithm2">Algorithm 2: Random Quicksort</string>
     <string name="algorithm3">Algorithm 3: Recursive function</string>
     <string name="algorithm4">Algorithm 4: Algorithm with classes and pointers</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>

@@ -32,6 +32,22 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content">
 
+        <Button
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:layout_width="300dp"
+            android:layout_weight="1"
+            android:id="@+id/save"
+            android:onClick="save"/>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:layout_width="200dp"
+            android:layout_weight="1"
+            android:id="@+id/cancel"
+            android:onClick="cancel"/>
+
     </TableRow>
 
 </TableLayout>

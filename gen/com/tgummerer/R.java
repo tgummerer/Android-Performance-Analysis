@@ -28,7 +28,8 @@ public final class R {
         public static final int algorithm4=0x7f060029;
         public static final int appName=0x7f060023;
         public static final int appimportance=0x7f06000c;
-        public static final int avg_difference=0x7f06002a;
+        public static final int avg_difference=0x7f06002c;
+        public static final int cancel=0x7f06002b;
         public static final int dalvikprivatedirty=0x7f060011;
         public static final int dalvikpss=0x7f06000f;
         public static final int dalvikshareddirty=0x7f060013;
@@ -37,10 +38,10 @@ public final class R {
         public static final int home_btn_show_monitor_app_diagram=0x7f060008;
         public static final int home_btn_show_stats=0x7f060005;
         public static final int home_btn_start_tests=0x7f060002;
-        public static final int max_difference=0x7f06002b;
+        public static final int max_difference=0x7f06002d;
         public static final int memUsage=0x7f060024;
         public static final int memusage_text=0x7f06000d;
-        public static final int min_difference=0x7f06002c;
+        public static final int min_difference=0x7f06002e;
         public static final int monitorView=0x7f06000b;
         public static final int monitor_running=0x7f06000a;
         public static final int monitorprivate=0x7f060021;
@@ -53,6 +54,7 @@ public final class R {
         public static final int otherpss=0x7f06001b;
         public static final int othershareddirty=0x7f06001f;
         public static final int progress_textview=0x7f060025;
+        public static final int save=0x7f06002a;
         public static final int tableRow1=0x7f060001;
         public static final int tableRow2=0x7f060004;
         public static final int tableRow3=0x7f060006;
@@ -85,6 +87,7 @@ public final class R {
         public static final int app_name=0x7f040000;
         public static final int appimportance=0x7f040008;
         public static final int avg_difference=0x7f040016;
+        public static final int cancel=0x7f04001f;
         public static final int dalvikprivatedirty=0x7f04000a;
         public static final int dalvikpss=0x7f040009;
         public static final int dalvikshareddirty=0x7f04000b;
@@ -107,6 +110,7 @@ public final class R {
         public static final int otherprivatedirty=0x7f040010;
         public static final int otherpss=0x7f04000f;
         public static final int othershareddirty=0x7f040011;
+        public static final int save=0x7f04001e;
         public static final int select_tests=0x7f040019;
     }
     public static final class style {
