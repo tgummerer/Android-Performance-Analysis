@@ -52,6 +52,8 @@ void Diagram::drawBars()
     if (sqlite3_step(pstmt) == SQLITE_ROW)
         nrtests = atoi((char *)sqlite3_column_text(pstmt, 0));
 
+    sqlite3_finalize(pstmt);
+
     // Avoid divisions by 0
     if (nrtests == 0)
         nrtests = -1;
@@ -66,6 +68,8 @@ void Diagram::drawBars()
 
         if (maxtime == 0)
             maxtime = -1;
+
+        sqlite3_finalize(pstmt);
     } else {
         maxtime = -1;
     }
@@ -89,7 +93,7 @@ void Diagram::drawBars()
         o->drawRectangle(BOTTOM, RIGHT - ((float)(i + 3 - langid * 2) * DISTANCE + ((i / 2) + 1) * barwidth), MAX_HEIGHT / maxtime * atoi((char *)sqlite3_column_text(pstmt, 2)), barwidth);
 
     }
-    //sqlite3_finalize(pstmt);
+    sqlite3_finalize(pstmt);
 }
 
 void Diagram::drawLegend()

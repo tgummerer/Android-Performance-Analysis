@@ -50,6 +50,7 @@ void MonitorDiagram::drawBars()
     int maxmem = 0;
     if (sqlite3_step(pstmt) == SQLITE_ROW)
         maxmem = atoi((char *)sqlite3_column_text(pstmt, 0));
+    sqlite3_finalize(pstmt);
 
     const char minquery[60] = "select min(memusage) from monitor";
     pstmt = c->prepare(minquery);
@@ -58,12 +59,14 @@ void MonitorDiagram::drawBars()
         minmem = atoi((char *)sqlite3_column_text(pstmt, 0));
 
     maxmem -= minmem;
+    sqlite3_finalize(pstmt);
 
     const char countquery[60] = "select count(*) from monitor";
     pstmt = c->prepare(countquery);
     int steps = 0;
     if (sqlite3_step(pstmt) == SQLITE_ROW)
         steps = atoi((char *)sqlite3_column_text(pstmt, 0));
+    sqlite3_finalize(pstmt);
 
     const char selectquery[200] = "select memusage from monitor";
     pstmt = c->prepare(selectquery);
@@ -87,6 +90,7 @@ void MonitorDiagram::drawBars()
         o->drawLine(((float)(MAX_HEIGHT + BORDERS * 2) / maxmem * prevmem) + BOTTOM - BORDERS, (float)(i) * stepwidth + LEFT + BORDERS, ((float)(MAX_HEIGHT + BORDERS * 2) / maxmem * memusage) + BOTTOM - BORDERS, (float)(i + 1) * stepwidth + LEFT + BORDERS);
         prevmem = memusage;
     }
+    sqlite3_finalize(pstmt);
 }
 
 float MonitorDiagram::val(float f)

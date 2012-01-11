@@ -52,12 +52,14 @@ void MemTestDiagram::drawJavaLine()
     int maxmem = 0;
     if (sqlite3_step(pstmt) == SQLITE_ROW)
         maxmem = atoi((char *)sqlite3_column_text(pstmt, 0));
+    sqlite3_finalize(pstmt);
 
     const char minquery[60] = "select min(memusage) from memtests";
     pstmt = c->prepare(minquery);
     int minmem = 0;
     if (sqlite3_step(pstmt) == SQLITE_ROW)
         minmem = atoi((char *)sqlite3_column_text(pstmt, 0));
+    sqlite3_finalize(pstmt);
 
     maxmem -= minmem;
 
@@ -66,6 +68,7 @@ void MemTestDiagram::drawJavaLine()
     int steps = 0;
     if (sqlite3_step(pstmt) == SQLITE_ROW)
         steps = atoi((char *)sqlite3_column_text(pstmt, 0));
+    sqlite3_finalize(pstmt);
 
     const char selectquery[200] = "select memusage from memtests where type = 0";
     pstmt = c->prepare(selectquery);
@@ -89,6 +92,7 @@ void MemTestDiagram::drawJavaLine()
         o->drawLine(((float)(MAX_HEIGHT + BORDERS * 2) / maxmem * prevmem) + BOTTOM - BORDERS, (float)(i) * stepwidth + LEFT + BORDERS, ((float)(MAX_HEIGHT + BORDERS * 2) / maxmem * memusage) + BOTTOM - BORDERS, (float)(i + 1) * stepwidth + LEFT + BORDERS);
         prevmem = memusage;
     }
+    sqlite3_finalize(pstmt);
 }
 
 void MemTestDiagram::drawCLine() 
