@@ -10,6 +10,7 @@
 #include "sqlite3.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <android/log.h>
 
 Diagram::Diagram()
 {
@@ -47,15 +48,27 @@ void Diagram::drawBars()
 {
     const char countquery[35] = "select count(*) from measurements";
     sqlite3_stmt * pstmt = c->prepare(countquery);
-    int nrtests = 0;
+    int nrtests = -1;
     if (sqlite3_step(pstmt) == SQLITE_ROW)
         nrtests = atoi((char *)sqlite3_column_text(pstmt, 0));
 
-    const char maxquery[60] = "select max(time) from measurements";
-    pstmt = c->prepare(maxquery);
-    int maxtime = 0;
-    if (sqlite3_step(pstmt) == SQLITE_ROW)
-        maxtime = atoi((char *)sqlite3_column_text(pstmt, 0));
+    // Avoid divisions by 0
+    if (nrtests == 0)
+        nrtests = -1;
+
+    int maxtime;
+    if (nrtests != -1) {
+        const char maxquery[60] = "select max(time) from measurements";
+        pstmt = c->prepare(maxquery);
+        maxtime = -1;
+        if (sqlite3_step(pstmt) == SQLITE_ROW) 
+            maxtime = atoi((char *)sqlite3_column_text(pstmt, 0));
+
+        if (maxtime == 0)
+            maxtime = -1;
+    } else {
+        maxtime = -1;
+    }
 
     const char selectquery[200] = "select langid, algorithmid, time from measurements order by algorithmid desc, langid asc";
     pstmt = c->prepare(selectquery);
@@ -76,7 +89,7 @@ void Diagram::drawBars()
         o->drawRectangle(BOTTOM, RIGHT - ((float)(i + 3 - langid * 2) * DISTANCE + ((i / 2) + 1) * barwidth), MAX_HEIGHT / maxtime * atoi((char *)sqlite3_column_text(pstmt, 2)), barwidth);
 
     }
-    sqlite3_finalize(pstmt);
+    //sqlite3_finalize(pstmt);
 }
 
 void Diagram::drawLegend()

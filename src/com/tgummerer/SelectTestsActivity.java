@@ -57,7 +57,7 @@ public class SelectTestsActivity extends Activity {
         editor.putBoolean("algorithm4", cb.isChecked());
 
         cb = (CheckBox) findViewById(R.id.memtest);
-        cb.setChecked(settings.getBoolean("memtest", true));
+        editor.putBoolean("memtest", cb.isChecked());
 
         editor.commit();
         setResult(RESULT_OK);
