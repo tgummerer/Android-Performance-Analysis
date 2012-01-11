@@ -52,4 +52,9 @@ public class PerformanceAnalysisActivity extends Activity {
         Intent tests = new Intent(PerformanceAnalysisActivity.this, SelectTestsActivity.class);
         startActivity(tests);
     }
+
+    public void memTestDiagram(View v) {
+        Intent memTestDiagram = new Intent(PerformanceAnalysisActivity.this, MemTestActivity.class);
+        startActivity(memTestDiagram);
+    }
 }

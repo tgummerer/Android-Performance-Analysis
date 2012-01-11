@@ -85,4 +85,12 @@ extern "C" {
         chain->kill(250);
         delete chain;
     }
+
+    void Java_com_tgummerer_Progress_cmemtest( JNIEnv * env )
+    {
+        Chain * chain = new Chain(50000);
+        int i = 0;
+        for (; i < 50000 / 6; i++)
+            chain->kill(i * 5);
+    }
 }

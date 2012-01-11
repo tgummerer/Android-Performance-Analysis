@@ -35,6 +35,9 @@ public class SelectTestsActivity extends Activity {
 
         cb = (CheckBox) findViewById(R.id.algorithm4);
         cb.setChecked(settings.getBoolean("algorithm4", true));
+
+        cb = (CheckBox) findViewById(R.id.memtest);
+        cb.setChecked(settings.getBoolean("memtest", true));
     }
 
     public void save(View v) {
@@ -52,6 +55,9 @@ public class SelectTestsActivity extends Activity {
 
         cb = (CheckBox) findViewById(R.id.algorithm4);
         editor.putBoolean("algorithm4", cb.isChecked());
+
+        cb = (CheckBox) findViewById(R.id.memtest);
+        cb.setChecked(settings.getBoolean("memtest", true));
 
         editor.commit();
         setResult(RESULT_OK);

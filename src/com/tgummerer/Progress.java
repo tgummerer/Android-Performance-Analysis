@@ -9,13 +9,18 @@
 package com.tgummerer;
 
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Debug.MemoryInfo;
 import android.widget.TextView;
 
 public class Progress extends Activity {
@@ -49,9 +54,12 @@ public class Progress extends Activity {
     	TextView tv = (TextView)findViewById(R.id.progress_textview);
     	if (langID == 0)
     		tv.append("[Java] Algorithm " + algorithmID + " started...\n");
-    	else
+        else if (langID == 1)
     		tv.append("[C] Algorithm " + algorithmID + " started...\n");
-    		
+        else if (langID == 2)
+            tv.append("[Java] Memtest started...\n");
+        else
+            tv.append("[C] Memtest started...\n");
     }
     
     public void algorithmEnded(long langID, long algorithmID, long time) {
@@ -71,6 +79,15 @@ public class Progress extends Activity {
     	db.insert("measurements", null, values);
     	db.close();
     }
+
+    public void memAlgorithmEnded(long langID) {
+        TextView tv = (TextView)findViewById(R.id.progress_textview);
+
+        if (langID == 2)
+            tv.append("[Java] Memtest completed\n");
+        else
+            tv.append("[C] Memtest completed\n");
+    }
     
     private class Algorithms extends AsyncTask<Void, Long, Integer> {
     	
@@ -89,15 +106,23 @@ public class Progress extends Activity {
                 recursive();
             if (settings.getBoolean("algorithm4", true)) 
                 classesTest();
+            if (settings.getBoolean("memtest", true))
+                memTest();
     		return 1;
     	}
     	
     	protected void onProgressUpdate(Long... progress) {
-    		if (progress[2] == 0) {
-    			algorithmStarted(progress[0], progress[1]);
-    		} else {
-    			algorithmEnded(progress[0], progress[1], progress[2]);
-    		}
+            if (progress[0] < 2) {
+                if (progress[2] == 0)
+                    algorithmStarted(progress[0], progress[1]);
+                else
+                    algorithmEnded(progress[0], progress[1], progress[2]);
+            } else {
+                if (progress[1] == 0)
+                    algorithmStarted(progress[0], 0);
+                else
+                    memAlgorithmEnded(progress[0]);
+            }
     	}
 
     	private void showProgress(long langID, long algorithmID, long time) {
@@ -243,6 +268,39 @@ public class Progress extends Activity {
             showProgress(0, 4, (long)average);
         }
 
+        private void memTest() {
+            ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
+            showProgress(2, 0, 0);
+
+            DatabaseHelper dbHelper = new DatabaseHelper(Progress.this);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            db.execSQL("delete from memtests;");
+            db.close();
+
+            final ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+            final int[] pid = {android.os.Process.myPid()};
+            
+            executor.scheduleAtFixedRate(new Runnable() {
+                public void run() {
+                    DatabaseHelper dbHelper = new DatabaseHelper(Progress.this);
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    MemoryInfo[] info = activityManager.getProcessMemoryInfo(pid);
+
+                    ContentValues values = new ContentValues(2);
+                    values.put("type", 0);
+                    values.put("memusage", info[0].dalvikPss);
+                    db.insert("memtests", null, values);
+                    db.close();
+                }
+            }, 0, 100, TimeUnit.MILLISECONDS);
+
+            Chain chain = new Chain(50000);
+            for (int i = 0; i < 50000 / 6; i++)
+                chain.kill(i * 5);
+
+            executor.shutdownNow();
+            showProgress(2, 1, 0);
+        }
     }
 
     private class CAlgorithms extends AsyncTask<Void, Long, Void> {
@@ -258,15 +316,23 @@ public class Progress extends Activity {
                 recursive();
             if (settings.getBoolean("algorithm4", true)) 
                 classesTest();
+            if (settings.getBoolean("memtest", true))
+                memTest();
     		return null;
     	}
-    	
+
     	protected void onProgressUpdate(Long... progress) {
-    		if (progress[2] == 0) {
-    			algorithmStarted(progress[0], progress[1]);
-    		} else {
-    			algorithmEnded(progress[0], progress[1], progress[2]);
-    		}
+            if (progress[0] < 2) {
+                if (progress[2] == 0)
+                    algorithmStarted(progress[0], progress[1]);
+                else
+                    algorithmEnded(progress[0], progress[1], progress[2]);
+            } else {
+                if (progress[1] == 0)
+                    algorithmStarted(progress[0], 0);
+                else
+                    memAlgorithmEnded(progress[0]);
+            }
     	}
     	
     	private void showProgress(long langID, long algorithmID, long time) {
@@ -355,12 +421,41 @@ public class Progress extends Activity {
 
             showProgress(1, 4, (long)average);
         }
+
+        private void memTest() {
+            ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
+            showProgress(3, 0, 0);
+
+            final ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+            final int[] pid = {android.os.Process.myPid()};
+            
+            executor.scheduleAtFixedRate(new Runnable() {
+                public void run() {
+                    DatabaseHelper dbHelper = new DatabaseHelper(Progress.this);
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    MemoryInfo[] info = activityManager.getProcessMemoryInfo(pid);
+
+                    ContentValues values = new ContentValues(2);
+                    values.put("type", 1);
+                    values.put("memusage", info[0].nativePss);
+                    db.insert("memtests", null, values);
+                    db.close();
+                }
+            }, 0, 100, TimeUnit.MILLISECONDS);
+
+            cmemtest();
+
+            executor.shutdownNow();
+            showProgress(3, 1, 0);
+        }
+
     }
     
     public native float cforloop();
 	public native void csort();
     public native long crecursive();
     public native void cclassestest();
+    public native void cmemtest();
     
     static {
         System.loadLibrary("algorithms");

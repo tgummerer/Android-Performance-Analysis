@@ -37,6 +37,9 @@
     <string name="algorithm2">Algorithm 2: Random Quicksort</string>
     <string name="algorithm3">Algorithm 3: Recursive function</string>
     <string name="algorithm4">Algorithm 4: Algorithm with classes and pointers</string>
+    <string name="memtest">Memory test</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="home_show_memtest_diagram">Show Memory test diagram</string>
+    <string name="statsdescription">Positive values mean that the C algorithm was faster, while negative values mean the Java algorithm was faster</string>
 </resources>

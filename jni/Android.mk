@@ -22,3 +22,11 @@ LOCAL_SRC_FILES := monitoropengl.cpp importgl.cpp gllib.cpp monitordiagram.cpp c
 LOCAL_LDLIBS := -lGLESv1_CM -ldl -llog
 
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := memtestopengl
+LOCAL_SRC_FILES := memtestopengl.cpp importgl.cpp gllib.cpp memtestdiagram.cpp connection.cpp sqlite3.c
+LOCAL_LDLIBS := -lGLESv1_CM -ldl -llog
+
+include $(BUILD_SHARED_LIBRARY)

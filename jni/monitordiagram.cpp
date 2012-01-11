@@ -77,7 +77,7 @@ void MonitorDiagram::drawBars()
     int i = 0;
     for (; i < steps - 1; ++i)
     {
-        if(!sqlite3_step(pstmt) == SQLITE_ROW)
+        if(!(sqlite3_step(pstmt) == SQLITE_ROW))
             break; // Should never happen, just for safety
 
         int memusage = atoi((char *)sqlite3_column_text(pstmt, 0));
