@@ -288,7 +288,7 @@ public class Progress extends Activity {
 
                     ContentValues values = new ContentValues(2);
                     values.put("type", 0);
-                    values.put("memusage", info[0].dalvikPss);
+                    values.put("memusage", info[0].dalvikPrivateDirty);
                     db.insert("memtests", null, values);
                     db.close();
                 }
@@ -297,6 +297,13 @@ public class Progress extends Activity {
             Chain chain = new Chain(50000);
             for (int i = 0; i < 50000 / 6; i++)
                 chain.kill(i * 5);
+            chain = null;
+
+            Chain chain2 = new Chain(50000);
+            for (int i = 0; i < 50000; i++)
+                chain2.kill(0);
+
+            chain2 = null;
 
             executor.shutdownNow();
             showProgress(2, 1, 0);
@@ -437,7 +444,7 @@ public class Progress extends Activity {
 
                     ContentValues values = new ContentValues(2);
                     values.put("type", 1);
-                    values.put("memusage", info[0].nativePss);
+                    values.put("memusage", info[0].nativePrivateDirty);
                     db.insert("memtests", null, values);
                     db.close();
                 }

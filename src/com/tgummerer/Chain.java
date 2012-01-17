@@ -48,16 +48,4 @@ public class Chain
     {
         return first;
     }
-    public static void main(String[] args)
-    {
-        int ITER = 100000;
-        long start = System.nanoTime();
-        for (int i = 0 ; i < ITER ; i++)
-        {
-            Chain chain = new Chain(40);
-            chain.kill(3);
-        }
-        long end = System.nanoTime();
-        System.out.println("Time per iteration = " + ((end - start) / (ITER )) + " nanoseconds.");
-    }
 }

@@ -92,5 +92,13 @@ extern "C" {
         int i = 0;
         for (; i < 50000 / 6; i++)
             chain->kill(i * 5);
+
+        delete chain;
+
+        Chain * chain2 = new Chain(50000);
+        for (i = 0; i < 50000; i++)
+            chain->kill(0);
+
+        delete chain2;
     }
 }

@@ -27,6 +27,7 @@ class MemTestDiagram {
         void drawAxis();
         void drawJavaLine();
         void drawCLine();
+        void drawLegend();
         float val(float);
     public:
         MemTestDiagram();

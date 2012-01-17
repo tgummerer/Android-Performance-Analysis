@@ -36,6 +36,7 @@ void MemTestDiagram::render()
     this->drawAxis();
     this->drawJavaLine();
     this->drawCLine();
+    this->drawLegend();
 }
 
 void MemTestDiagram::drawAxis()
@@ -87,7 +88,7 @@ void MemTestDiagram::drawJavaLine()
 
         int memusage = atoi((char *)sqlite3_column_text(pstmt, 0));
         memusage -= minmem;
-        o->setRGBColor(120, 120, 255, 0);
+        o->setRGBColor(255, 120, 120, 0);
 
         o->drawLine(((float)(MAX_HEIGHT + BORDERS * 2) / maxmem * prevmem) + BOTTOM - BORDERS, (float)(i) * stepwidth + LEFT + BORDERS, ((float)(MAX_HEIGHT + BORDERS * 2) / maxmem * memusage) + BOTTOM - BORDERS, (float)(i + 1) * stepwidth + LEFT + BORDERS);
         prevmem = memusage;
@@ -134,11 +135,33 @@ void MemTestDiagram::drawCLine()
 
         int memusage = atoi((char *)sqlite3_column_text(pstmt, 0));
         memusage -= minmem;
-        o->setRGBColor(255, 120, 120, 0);
+        o->setRGBColor(120, 120, 255, 0);
 
         o->drawLine(((float)(MAX_HEIGHT + BORDERS * 2) / maxmem * prevmem) + BOTTOM - BORDERS, (float)(i) * stepwidth + LEFT + BORDERS, ((float)(MAX_HEIGHT + BORDERS * 2) / maxmem * memusage) + BOTTOM - BORDERS, (float)(i + 1) * stepwidth + LEFT + BORDERS);
         prevmem = memusage;
     }
+}
+
+void MemTestDiagram::drawLegend()
+{
+    o->setRGBColor(255, 120, 120, 0);
+    o->drawRectangle(BOTTOM + MAX_HEIGHT, LEFT + 0.1, 0.1, 0.065);
+
+    // Draw a J for Java
+    o->setRGBColor(0, 0, 0, 0);
+    o->drawLine(BOTTOM + MAX_HEIGHT, LEFT + 0.2, BOTTOM + MAX_HEIGHT, LEFT + 0.25);
+    o->drawLine(BOTTOM + MAX_HEIGHT, LEFT + 0.25, BOTTOM + MAX_HEIGHT + 0.075, LEFT + 0.25);
+    o->drawLine(BOTTOM + MAX_HEIGHT + 0.075, LEFT + 0.25, BOTTOM + MAX_HEIGHT + 0.1, LEFT + 0.225);
+    o->drawLine(BOTTOM + MAX_HEIGHT + 0.1, LEFT + 0.225, BOTTOM + MAX_HEIGHT + 0.075, LEFT + 0.2);
+
+    o->setRGBColor(120, 120, 255, 0);
+    o->drawRectangle(BOTTOM + MAX_HEIGHT + 0.2, LEFT + 0.1, 0.1, 0.065);
+    
+    // Draw a C
+    o->setRGBColor(0, 0, 0, 0);
+    o->drawLine(BOTTOM + MAX_HEIGHT + 0.2, LEFT + 0.2, BOTTOM + MAX_HEIGHT + 0.2, LEFT + 0.25);
+    o->drawLine(BOTTOM + MAX_HEIGHT + 0.2, LEFT + 0.2, BOTTOM + MAX_HEIGHT + 0.3, LEFT + 0.2);
+    o->drawLine(BOTTOM + MAX_HEIGHT + 0.3, LEFT + 0.2, BOTTOM + MAX_HEIGHT + 0.3, LEFT + 0.25);
 }
 
 float MemTestDiagram::val(float f)
