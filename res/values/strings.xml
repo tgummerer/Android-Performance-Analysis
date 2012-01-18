@@ -42,4 +42,5 @@
     <string name="cancel">Cancel</string>
     <string name="home_show_memtest_diagram">Show Memory test diagram</string>
     <string name="statsdescription">Positive values mean that the C algorithm was faster, while negative values mean the Java algorithm was faster</string>
+    <string name="kb">kb</string>
 </resources>

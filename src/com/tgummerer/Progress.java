@@ -68,9 +68,9 @@ public class Progress extends Activity {
     	SQLiteDatabase db = dbhelper.getWritableDatabase();
     	
     	if (langID == 0)
-    		tv.append("[Java] Algorithm " + algorithmID + " completed in " + time + "\n");
+    		tv.append("[Java] Algorithm " + algorithmID + " completed in " + time + " ns\n");
     	else
-    		tv.append("[C] Algorithm " + algorithmID + " completed in " + time + "\n");
+    		tv.append("[C] Algorithm " + algorithmID + " completed in " + time + " ns\n");
     	
     	ContentValues values = new ContentValues(3);
     	values.put("langid", langID);

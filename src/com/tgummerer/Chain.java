@@ -3,7 +3,6 @@
  * 
  * Sample class for performance check taken from http://blog.dhananjaynene.com/2008/07/performance-comparison-c-java-python-ruby-jython-jruby-groovy/
  * 
- * Copyright (c) Thomas Gummerer 2011 | All rights reserved
  */
 
 package com.tgummerer;

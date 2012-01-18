@@ -46,10 +46,16 @@
             android:id="@+id/dalvikpss"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
             android:layout_weight="1"
             android:text="TextView" 
             android:gravity="right"/>
+
+        <TextView
+            android:id="@+id/dalvikkb2"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/kb"
+            android:gravity="left" />
 
     </LinearLayout>
     <LinearLayout
@@ -68,9 +74,16 @@
             android:text="TextView" 
             android:layout_weight="1" 
             android:layout_width="100dp" 
-            android:layout_marginRight="50dp"
             android:id="@+id/dalvikprivatedirty" 
             android:gravity="right" />
+
+        <TextView
+            android:id="@+id/dalvikkb3"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/kb"
+            android:gravity="left" />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,8 +102,14 @@
             android:layout_weight="1" 
             android:layout_width="100dp" 
             android:id="@+id/dalvikshareddirty" 
-            android:layout_marginRight="50dp"
             android:gravity="right"/>
+
+        <TextView
+            android:id="@+id/dalvikkb3"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/kb"
+            android:gravity="left" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,11 +126,16 @@
             android:id="@+id/nativepss"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
             android:layout_weight="1"
             android:text="TextView" 
             android:gravity="right"/>
 
+        <TextView
+            android:id="@+id/dalvikkb4"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/kb"
+            android:gravity="left" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -130,8 +154,14 @@
             android:layout_weight="1" 
             android:layout_width="100dp" 
             android:id="@+id/nativeprivatedirty" 
-            android:layout_marginRight="50dp"
             android:gravity="right" />
+
+        <TextView
+            android:id="@+id/dalvikkb5"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/kb"
+            android:gravity="left" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -150,8 +180,14 @@
             android:layout_weight="1" 
             android:layout_width="100dp" 
             android:id="@+id/nativeshareddirty" 
-            android:layout_marginRight="50dp"
             android:gravity="right"/>
+
+        <TextView
+            android:id="@+id/dalvikkb6"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/kb"
+            android:gravity="left" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -168,11 +204,16 @@
             android:id="@+id/otherpss"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
             android:layout_weight="1"
             android:text="TextView" 
             android:gravity="right"/>
 
+        <TextView
+            android:id="@+id/dalvikkb7"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/kb"
+            android:gravity="left" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -191,8 +232,14 @@
             android:layout_weight="1" 
             android:layout_width="100dp" 
             android:id="@+id/otherprivatedirty" 
-            android:layout_marginRight="50dp"
             android:gravity="right" />
+
+        <TextView
+            android:id="@+id/dalvikkb8"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/kb"
+            android:gravity="left" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -211,8 +258,14 @@
             android:layout_weight="1" 
             android:layout_width="100dp" 
             android:id="@+id/othershareddirty" 
-            android:layout_marginRight="50dp"
             android:gravity="right"/>
+
+        <TextView
+            android:id="@+id/dalvikkb9"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/kb"
+            android:gravity="left" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

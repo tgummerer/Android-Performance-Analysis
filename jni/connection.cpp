@@ -14,9 +14,7 @@ Connection::~Connection()
 
 void Connection::exec(const char * query)
 {
-    // TODO printf is for debugging purposes
-    printf("%i\n", sqlite3_exec(db, query, NULL, NULL, NULL));
-    fflush(stdout);
+    sqlite3_exec(db, query, NULL, NULL, NULL);
 }
 
 sqlite3_stmt * Connection::prepare(const char * query)
