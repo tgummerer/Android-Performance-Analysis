@@ -57,4 +57,9 @@ public class PerformanceAnalysisActivity extends Activity {
         Intent memTestDiagram = new Intent(PerformanceAnalysisActivity.this, MemTestActivity.class);
         startActivity(memTestDiagram);
     }
+
+    public void exportData(View v) {
+        Intent exportData = new Intent(PerformanceAnalysisActivity.this, ExportActivity.class);
+        startActivity(exportData);
+    }
 }

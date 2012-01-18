@@ -20,8 +20,10 @@
         <activity android:name=".StatsActivity"></activity>
         <activity android:name=".SelectTestsActivity"></activity>
         <activity android:name=".MemTestActivity"></activity>
+        <activity android:name=".ExportActivity"></activity>
         
         <service android:name="com.tgummerer.MonitorService"></service>
     </application>
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 </manifest>

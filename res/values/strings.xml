@@ -13,6 +13,8 @@
     <string name="home_monitor_applications">Monitor apps</string>
     <string name="home_show_monitor_diagram">Show monitor diagram</string>
     <string name="home_credit">Icons by www.androidicons.com</string>
+    <string name="home_export_data">Export data to SD card</string>
+    <string name="home_show_stats">Show statistics</string>
     <string name="monitor_running">Running apps</string>
     <string name="monitor_memusage">Memory usage</string>
     <string name="appimportance">Importance</string>
@@ -28,7 +30,6 @@
     <string name="monitorpss">Monitor Pss Usage</string>
     <string name="monitorprivate">Monitor Private Mem Usage</string>
     <string name="monitorshared">Monitor Shared Mem Usage</string>
-    <string name="home_show_stats">Show statistics</string>
     <string name="avg_difference">Average difference</string>
     <string name="max_difference">Maximum difference</string>
     <string name="min_difference">Minimum difference</string>
